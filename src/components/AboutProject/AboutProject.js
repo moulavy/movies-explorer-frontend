@@ -1,6 +1,6 @@
 //компонент с описанием дипломного проекта.
 import React from 'react';
-
+import "./AboutProject.css"
 
 function AboutProject() {
    return (
