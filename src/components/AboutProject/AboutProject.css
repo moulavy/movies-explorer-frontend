@@ -15,8 +15,8 @@ margin: 0 0 23px 0;
 .about-project__description{
    list-style: none;
    display: flex;
-   height: 200px;
-   padding: 70px 0 0 0;
+   /* height: 200px; */
+   padding: 70px 0 110px 0;
    border-top: 1px solid #DADADA;
    margin:0;
 }
@@ -48,6 +48,7 @@ line-height: 20px;
    display: flex;
 }
 .about-project__backend{
+   position: relative;
    display: flex;
    align-items:center;
    justify-content: center;
@@ -59,7 +60,20 @@ line-height: 20px;
 font-size: 14px;
 line-height: 17px;
 }
+.about-project__backend::after{
+   content: "Back-end";
+  position: absolute;
+  font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+color: #8B8B8B;
+  top:49px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
 .about-project__frontend{
+   position: relative;
    display: flex;
    align-items:center;
    justify-content: center;
@@ -71,4 +85,16 @@ line-height: 17px;
 font-size: 14px;
 line-height: 17px;
 text-align: center;
+}
+.about-project__frontend::after{
+   content: "Front-end";
+  position: absolute;
+  font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+color: #8B8B8B;
+  top:49px;
+  left: 0;
+  width: 100%;
+  text-align: center;
 }
