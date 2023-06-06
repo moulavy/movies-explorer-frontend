@@ -1,5 +1,5 @@
 .techs{
-   padding:110px 70px;
+   padding:100px 70px;
    background: #272727;
 }
 .techs__container{
@@ -55,4 +55,23 @@ letter-spacing: -0.04em;
    line-height: 17px;
    letter-spacing: -0.04em;
    margin-right:10px ;
+}
+@media screen and (max-width: 800px) {
+   .techs{
+   padding:90px 70px;
+   }
+.techs__count{
+margin:80px 0 22px 0;
+}
+.techs__description{
+font-size: 12px;
+line-height: 18px;
+margin-bottom: 83px;
+}
+.techs__item{
+   font-size: 12px;
+   line-height: 15px;
+   width: 84px;
+   height: 57px;
+}
 }
