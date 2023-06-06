@@ -1,6 +1,6 @@
 //компонент страницы «О проекте». Он будет содержать только презентационные компоненты и в будущем, за исключением шапки навигации.
 import React from 'react';
-import Promo from '../Promo/Promo.js'; 
+import Promo from '../Promo/Promo.js';
 import NavTab from '../NavTab/NavTab.js';
 import AboutProject from '../AboutProject/AboutProject.js';
 import Techs from '../Techs/Techs.js';
@@ -15,7 +15,7 @@ function Main() {
          <AboutProject />
          <Techs />
          <AboutMe />
-         <Portfolio/>
+         <Portfolio />
       </>
    );
 }

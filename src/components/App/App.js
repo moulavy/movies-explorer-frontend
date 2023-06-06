@@ -4,7 +4,7 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Main from '../Main/Main.js'
 function App() {
    return (
-      <div className="page">         
+      <div className="page">
          <Routes>
             <Route path='/' element={<Main />} />
             {/* <Route path='/signin' element={<Login />} />
@@ -12,7 +12,7 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/saved-movies' element={<SavedMovies />} />
             <Route path="*" element={<PageNotFound/>}/> */}
-         </Routes>       
+         </Routes>
       </div>
    );
 }
