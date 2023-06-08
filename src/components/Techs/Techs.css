@@ -60,7 +60,7 @@
   line-height: 17px;
   letter-spacing: -0.04em; 
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 806px) {
   .techs {
     padding: 90px 60px;
   }
