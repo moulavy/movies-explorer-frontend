@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutMe.css';
-import aboutAvatar from '../../images/aboutAvatar.jpg';
+import aboutAvatarImg from '../../images/aboutAvatar.jpg';
 
 function AboutMe() {
    return (
@@ -16,7 +16,7 @@ function AboutMe() {
                      После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
                   <a className="about-me__github" href='#'>Github</a>
                </div>
-               <img className='about-me__avatar' src={aboutAvatar} alt="аватар"/>
+               <img className='about-me__avatar' src={aboutAvatarImg} alt="аватар"/>
             </div>
          </div>
       </section>
