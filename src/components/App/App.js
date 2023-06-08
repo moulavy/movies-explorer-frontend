@@ -2,6 +2,7 @@ import React from 'react';
 import '../../index.css';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Main from '../Main/Main.js'
+import Footer from '../Footer/Footer.js'
 function App() {
    return (
       <div className="page">
@@ -13,6 +14,7 @@ function App() {
             <Route path='/saved-movies' element={<SavedMovies />} />
             <Route path="*" element={<PageNotFound/>}/> */}
          </Routes>
+         <Footer/>
       </div>
    );
 }
