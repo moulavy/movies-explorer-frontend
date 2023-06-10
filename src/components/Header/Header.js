@@ -3,21 +3,23 @@ import './Header.css';
 import logoImg from '../../images/logo.svg';
 import iconProfileImg from '../../images/iconProfile.svg'
 import { Link } from 'react-router-dom';
-const isLoggedIn = false;
+const isLoggedIn = true;
 function Header() {
    return (
       <header className={(isLoggedIn ? 'header header-movies' : 'header header-main')}>
-         <div className='header__container'>
+         <div className={(isLoggedIn ? 'header__container header__container-movies' : 'header__container header__container-main')}>
             <img src={logoImg} alt="лого" />
             {isLoggedIn ? (
-               <>
+               <div className="header__content">
                   <nav className="header__movies-section">
-                     <Link className='header__movies'>Фильмы</Link>
+                     <Link className='header__movies header__movies_enabled'>Фильмы</Link>
                      <Link className='header__movies'>Сохраненные фильмы</Link>
                   </nav>
-                  <Link className='header__profile'>Аккаунт</Link>
-                  <img src={iconProfileImg} alt="иконка профиля" />
-               </>
+                  <div className="header__profile">
+                  <Link className='header__profile-text'>Аккаунт</Link>
+                     <img className='header__profile-img' src={iconProfileImg} alt="иконка профиля" />
+                  </div>
+               </div>
             ) : (
                <nav className='header__links'>
                      <Link className='header__registration'>Регистрация</Link>
