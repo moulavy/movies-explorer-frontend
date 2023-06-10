@@ -9,9 +9,10 @@ import Portfolio from '../Portfolio/Portfolio.js';
 import Header from '../Header/Header.js'
 
 function Main() {
+   const isLoggedIn = false;
    return (
       <>
-         <Header/>
+         <Header isLoggedIn={isLoggedIn} />
          <Promo />
          <NavTab />
          <AboutProject />

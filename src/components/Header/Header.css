@@ -126,6 +126,7 @@ line-height: 16px;
    display:block;
    position: absolute;
    top:15px;
+   z-index: 1100;
    right: 30px;
    border:none;
    background:url('../../images/burgerImg.svg');
