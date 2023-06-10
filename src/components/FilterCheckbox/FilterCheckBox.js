@@ -4,12 +4,13 @@ import './FilterCheckBox.css';
 
 function FilterCheckBox() {
    return (
-      
-         <div class="checkbox">
-            <input type="checkbox" id="filter" className="checkbox__input"/>
-               <label htmlFor="filter" className="checkbox__label"></label>
+      <label htmlFor="filter" className="checkbox">
+         <input type="checkbox" id="filter" className="checkbox__input" />
+         <div className="checkbox__container">            
+            <div className="checkbox__slider"></div>
+            <span className="checkbox__text">Короткометражки</span>
          </div>
-      
+      </label>
    );
 }
 
