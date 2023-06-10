@@ -125,7 +125,7 @@ line-height: 16px;
    top:15px;
    right: 30px;
    border:none;
-   background:url('../../images/burgerImg.png');
+   background:url('../../images/burgerImg.svg');
    width: 44px;
    height: 44px;
 }
@@ -168,5 +168,28 @@ line-height: 22px;
 .header__profile{
    margin-bottom: 92px;
    justify-content: center;
+}
+}
+
+@media screen and (max-width: 550px) {
+.header__burger-menu{   
+   top:15px;
+   right: 14px;
+   background:url('../../images/burgerImg-mini.svg');
+   width: 40px;
+   height: 43px;
+}
+.header__home{
+   display: block;
+}
+.header__content{   
+   height: 100vh;
+   width: 100%;
+}
+.header__movies-section{
+   margin-top: 153px;
+}
+.header__profile{
+   margin-bottom: 48px;
 }
 }
