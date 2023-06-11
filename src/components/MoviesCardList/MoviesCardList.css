@@ -25,7 +25,7 @@
 
 @media screen and (max-width: 766px) {
   .movieslist__container {
-    grid-template-columns: minmax(300px, 1fr);
+    grid-template-columns: minmax(200px, 1fr);
     grid-gap: 34px;
   }
 }

@@ -5,6 +5,7 @@ import Header from '../Header/Header.js';
 import SearchForm from '../SearchForm/SearchForm.js';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import ButtonMore from '../ButtonMore/ButtonMore.js'
+import Footer from '../Footer/Footer.js';
 
 function Movies() {
    const isLoggedIn = true;
@@ -13,7 +14,8 @@ function Movies() {
          <Header isLoggedIn={isLoggedIn} />
          <SearchForm />
          <MoviesCardList />
-         <ButtonMore/>
+         <ButtonMore />
+         <Footer />
       </>
    );
 }

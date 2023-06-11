@@ -79,3 +79,16 @@ line-height: 12px;
 line-height: 15px;
 }
 }
+@media screen and (max-width: 319px) {
+
+.movie__time{
+ 
+font-size: 10px;
+line-height: 12px;
+
+}
+.movie__title{
+   font-size: 12px;
+line-height: 15px;
+}
+}
