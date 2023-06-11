@@ -6,14 +6,16 @@ import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 function SearchForm() {
    return (
       <section className="search">
-         <form className="search__form">
-            <img className="search__icon" alt="иконка поиска" src={searchIcon} />
-            <input className="search__input" type="text" placeholder='Фильм' />
-            <div className="search__button-wrapper">
-               <button type="submit" className="search__button">Найти</button>
-            </div>
-            <FilterCheckBox />            
-        </form>
+         <div className="search__container">
+            <form className="search__form">
+               <img className="search__icon" alt="иконка поиска" src={searchIcon} />
+               <input className="search__input" type="text" placeholder='Фильм' />
+               <div className="search__button-wrapper">
+                  <button type="submit" className="search__button">Найти</button>
+               </div>
+               <FilterCheckBox />
+            </form>
+         </div>
       </section>
    );
 }
