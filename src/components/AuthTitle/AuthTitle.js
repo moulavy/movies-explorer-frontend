@@ -1,10 +1,10 @@
 import React from 'react';
 import './AuthTitle.css';
 
-function AuthTitle() {
+function AuthTitle({title}) {
    return (
      
-         <h1 className="auth-title__text">Добро пожаловать!</h1>
+         <h1 className="auth-title__text">{title}</h1>
       
    );
 }
