@@ -68,6 +68,9 @@ cursor: pointer;
 margin-left:21.35px ;
 padding:0;
 }
+.search__button:hover{
+   opacity: 0.8;
+}
 
 @media screen and (max-width: 805px) {
    .search{

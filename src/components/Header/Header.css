@@ -20,6 +20,9 @@
   align-items: center;
   justify-content: space-between;
 }
+.header__logo-img:hover{
+opacity:0.8 ;
+}
 .header__links {
   display: flex;
   gap: 30px;
@@ -34,6 +37,9 @@
   font-size: 12px;
   line-height: 16px;
 }
+.header__registration:hover{
+   opacity: 0.7;
+}
 .header__login {
   display: flex;
   align-items: center;
@@ -47,6 +53,9 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+}
+.header__login:hover{
+   opacity: 0.8;
 }
 .header__burger-menu{
    display:none;
@@ -81,6 +90,9 @@
   align-items:center;
   gap:17px;
 }
+.header__profile:hover{
+   opacity: 0.7;
+}
 .header__content{
    display: flex;
    justify-content: space-between;
@@ -99,6 +111,9 @@
   font-size: 13px;
   line-height: 18px;
   color: #fff;
+}
+.header__movies:hover{
+   opacity: 0.7;
 }
 .header__home{
    display: none;

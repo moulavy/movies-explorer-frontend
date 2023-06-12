@@ -26,7 +26,7 @@ function Header({ linkActive,isLoggedIn }) {
       <header className={(isLoggedIn ? 'header header-movies' : 'header header-main')}>
          <div className={(isLoggedIn ? 'header__container header__container-movies' : 'header__container header__container-main')}>
             <Link to="/" className="header__logo">
-               <img src={logoImg} alt="лого" />
+               <img src={logoImg} alt="лого" className="header__logo-img"/>
             </Link>
             {isLoggedIn && (
                <button onClick={toggleMenu} className={(menu ? "header__burger-close" : "header__burger-menu")} />
@@ -39,7 +39,7 @@ function Header({ linkActive,isLoggedIn }) {
                      <Link to="/saved-movies" className={(linkActive === "saved-movies" ? 'header__link_enabled header__movies' : 'header__movies')}>Сохраненные фильмы</Link>
                   </nav>
                   <div className="header__profile">
-                     <Link to="/profile" className={(linkActive === "profile" ? 'header__link_enabled header__profile-text' : 'header__profile - text')}>Аккаунт</Link>
+                     <Link to="/profile" className={(linkActive === "profile" ? 'header__link_enabled header__profile-text' : 'header__profile-text')}>Аккаунт</Link>
                      <Link to="/profile"><img className='header__profile-img' src={iconProfileImg} alt="иконка профиля" /></Link>
                   </div>
                </div>

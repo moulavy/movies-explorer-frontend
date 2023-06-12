@@ -69,6 +69,9 @@
   color: #fff;
   cursor: pointer;
 }
+.profile__button:hover{
+   opacity: 0.7;
+}
 .profile__logout{
    display: flex;
    justify-content: center;
@@ -79,6 +82,9 @@ color: #EE3465;
 font-weight: 500;
 font-size: 13px;
 line-height: 16px;
+}
+.profile__logout:hover{
+   opacity: 0.7;
 }
 @media screen and (max-width: 805px) {
    .profile {

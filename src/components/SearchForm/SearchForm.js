@@ -9,7 +9,6 @@ function SearchForm() {
    useEffect(() => {
       function checkResolution() {
          const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
          setIsMobileScreen(screenWidth < 686);
       }
       checkResolution();

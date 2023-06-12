@@ -19,6 +19,9 @@
 font-size: 13px;
 line-height: 18px;
 }
+.checkbox__text:hover{
+  opacity: 0.7;
+}
 
 .checkbox__slider {
   width: 36px;
