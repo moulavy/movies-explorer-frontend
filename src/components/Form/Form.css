@@ -8,11 +8,16 @@
   width: 396px;
   margin: 0 auto;
 }
-.form__wrapper {
-   display: flex;
+/* .form__inputs{
+  display: flex;
    flex-direction: column;
   margin-bottom: 134px;
   gap:24px;
+} */
+.form__wrapper {
+   display: flex;
+   flex-direction: column; 
+  
 }
 .form__logo {
   width: 38px;
@@ -127,8 +132,28 @@ line-height: 15px;
   display: flex;
   margin: 0 auto 50px;
 }
-.form__wrapper {
-  margin-bottom: 222px;
- 
+}
+/*-----------------------------Login-------------*/
+.form__inputs_value_login{
+  display: flex;
+   flex-direction: column;
+  margin-bottom: 221px;
+  gap:24px;
+}
+@media screen and (max-width: 405px) {
+.form__inputs_value_login {
+  margin-bottom: 309px; 
+}
+}
+/*-----------------------------Register-------------*/
+.form__inputs_value_register{
+  display: flex;
+   flex-direction: column;
+  margin-bottom: 134px;
+  gap:24px;
+}
+@media screen and (max-width: 405px) {
+.form__inputs_value_register {
+  margin-bottom: 222px; 
 }
 }
