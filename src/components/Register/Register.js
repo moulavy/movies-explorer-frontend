@@ -3,7 +3,7 @@ import './Register.css';
 import Form from '../Form/Form.js';
 function Register() {
    return (
-      <Form classNameInputs="form__inputs_value_register" title="Добро пожаловать!" linkText="Войти" textButton="Зарегистрироваться" question="Уже зарегистрированы?" children={
+      <Form link="/signin" classNameInputs="form__inputs_value_register" title="Добро пожаловать!" linkText="Войти" textButton="Зарегистрироваться" question="Уже зарегистрированы?" children={
          <>
             <div className="form__group">
                <label className="form__label" htmlFor="name">Имя</label>

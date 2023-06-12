@@ -3,7 +3,7 @@ import './Login.css';
 import Form from '../Form/Form.js';
 function Login() {
    return (
-      <Form classNameInputs="form__inputs_value_login" title="Рады видеть!" linkText="Регистрация" textButton="Войти" question="Еще не зарегистрированы?" children={
+      <Form link="/signup" classNameInputs="form__inputs_value_login" title="Рады видеть!" linkText="Регистрация" textButton="Войти" question="Еще не зарегистрированы?" children={
          <>            
             <div className="form__group">
                <label className="form__label" htmlFor="email">E-mail</label>
