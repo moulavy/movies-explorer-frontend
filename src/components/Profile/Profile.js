@@ -7,7 +7,7 @@ function Profile({ name }) {
    const isLoggedIn = true;
    return (
       <>
-         <Header isLoggedIn={isLoggedIn} />
+         <Header linkActive="profile" isLoggedIn={isLoggedIn} />
          <section className="profile">
             <div className="profile__container">
 

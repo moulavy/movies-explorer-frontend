@@ -13,7 +13,7 @@ function Main() {
    const isLoggedIn = false;
    return (
       <>
-         <Header isLoggedIn={isLoggedIn} />
+         <Header linkActive="home" isLoggedIn={isLoggedIn} />
          <Promo />
          <NavTab />
          <AboutProject />

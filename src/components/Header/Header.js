@@ -4,7 +4,7 @@ import logoImg from '../../images/logo.svg';
 import iconProfileImg from '../../images/iconProfile.svg';
 import { Link } from 'react-router-dom';
 
-function Header({ isLoggedIn }) {
+function Header({ linkActive,isLoggedIn }) {
    const [menu, setMenu] = useState(false);
 
    const toggleMenu = () => {
@@ -34,12 +34,12 @@ function Header({ isLoggedIn }) {
             {isLoggedIn ? (
                <div className={(menu ? "header__content header__content_open" : "header__content")} >
                   <nav className="header__movies-section">
-                     <Link to="/" className='header__movies header__home'>Главная</Link>
-                     <Link to="/movies" className='header__movies header__movies_enabled'>Фильмы</Link>
-                     <Link to="/saved-movies" className='header__movies'>Сохраненные фильмы</Link>
+                     <Link to="/" className={(linkActive === "home" ? 'header__link_enabled header__movies header__home' : 'header__movies header__home')}>Главная</Link>
+                     <Link to="/movies" className={(linkActive === "movies" ? 'header__movies header__link_enabled' : 'header__movies')}>Фильмы</Link>
+                     <Link to="/saved-movies" className={(linkActive === "saved-movies" ? 'header__link_enabled header__movies' : 'header__movies')}>Сохраненные фильмы</Link>
                   </nav>
                   <div className="header__profile">
-                     <Link to="/profile" className='header__profile-text'>Аккаунт</Link>
+                     <Link to="/profile" className={(linkActive === "profile" ? 'header__link_enabled header__profile-text' : 'header__profile - text')}>Аккаунт</Link>
                      <Link to="/profile"><img className='header__profile-img' src={iconProfileImg} alt="иконка профиля" /></Link>
                   </div>
                </div>

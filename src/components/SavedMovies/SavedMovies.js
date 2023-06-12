@@ -12,7 +12,7 @@ function SavedMovies() {
    const isPageSavedMovies = true;
    return (
       <>
-         <Header isLoggedIn={isLoggedIn} />
+         <Header linkActive="saved-movies" isLoggedIn={isLoggedIn} />
          <SearchForm />
          <MoviesCardList isPageSavedMovies={isPageSavedMovies}    />
          <ButtonMore />

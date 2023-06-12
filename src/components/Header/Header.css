@@ -103,7 +103,7 @@
 .header__home{
    display: none;
 }
-.header__movies_enabled {
+.header__link_enabled {
   font-weight: 500;
 }
 .header__profile-text{
@@ -176,7 +176,7 @@ gap:28px;
 font-size: 18px;
 line-height: 22px;
 }
-.header__movies_enabled{
+.header__link_enabled{
    padding-bottom: 4px;
    border-bottom:2px #fff solid;
 }
