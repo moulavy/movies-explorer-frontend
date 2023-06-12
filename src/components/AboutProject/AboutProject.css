@@ -125,7 +125,6 @@
 }
 
 @media screen and (max-width: 450px) {
-  
   .about-project__title {
     font-size: 18px;
     line-height: 22px;
@@ -154,7 +153,7 @@
   }
 }
 @media screen and (max-width: 405px) {
-   .about-project {
+  .about-project {
     padding: 70px 18px 93px;
   }
   .about-project__backend {
@@ -182,7 +181,7 @@
 }
 @media screen and (max-width: 320px) {
   .about-project__backend {
-    width: 100px;  
+    width: 100px;
   }
   .about-project__frontend {
     width: 184px;

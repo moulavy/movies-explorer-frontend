@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
 import logoImg from '../../images/logo.svg';
 import iconProfileImg from '../../images/iconProfile.svg';
 import { Link } from 'react-router-dom';
 
-function Header({ linkActive,isLoggedIn }) {
+function Header({ linkActive, isLoggedIn }) {
    const [menu, setMenu] = useState(false);
 
    const toggleMenu = () => {
@@ -26,7 +26,7 @@ function Header({ linkActive,isLoggedIn }) {
       <header className={(isLoggedIn ? 'header header-movies' : 'header header-main')}>
          <div className={(isLoggedIn ? 'header__container header__container-movies' : 'header__container header__container-main')}>
             <Link to="/" className="header__logo">
-               <img src={logoImg} alt="лого" className="header__logo-img"/>
+               <img src={logoImg} alt="лого" className="header__logo-img" />
             </Link>
             {isLoggedIn && (
                <button onClick={toggleMenu} className={(menu ? "header__burger-close" : "header__burger-menu")} />

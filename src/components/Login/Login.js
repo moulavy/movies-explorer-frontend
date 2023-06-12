@@ -4,7 +4,7 @@ import Form from '../Form/Form.js';
 function Login() {
    return (
       <Form link="/signup" classNameInputs="form__inputs_value_login" title="Рады видеть!" linkText="Регистрация" textButton="Войти" question="Еще не зарегистрированы?" children={
-         <>            
+         <>
             <div className="form__group">
                <label className="form__label" htmlFor="email">E-mail</label>
                <input autoComplete="off" type="email" id="email" className="form__input form__email" name="email" required />

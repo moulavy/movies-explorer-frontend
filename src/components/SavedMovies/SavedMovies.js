@@ -14,7 +14,7 @@ function SavedMovies() {
       <>
          <Header linkActive="saved-movies" isLoggedIn={isLoggedIn} />
          <SearchForm />
-         <MoviesCardList isPageSavedMovies={isPageSavedMovies}    />
+         <MoviesCardList isPageSavedMovies={isPageSavedMovies} />
          <ButtonMore />
          <Footer />
       </>

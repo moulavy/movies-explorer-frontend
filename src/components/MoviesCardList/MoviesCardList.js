@@ -3,18 +3,10 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
-function MoviesCardList({isPageSavedMovies}) {
+function MoviesCardList({ isPageSavedMovies }) {
    return (
       <section className="movieslist">
          <div className="movieslist__container">
-            <MoviesCard isPageSavedMovies={isPageSavedMovies}/> 
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
             <MoviesCard isPageSavedMovies={isPageSavedMovies} />
             <MoviesCard isPageSavedMovies={isPageSavedMovies} />
             <MoviesCard isPageSavedMovies={isPageSavedMovies} />
@@ -22,9 +14,17 @@ function MoviesCardList({isPageSavedMovies}) {
             <MoviesCard isPageSavedMovies={isPageSavedMovies} />
             <MoviesCard isPageSavedMovies={isPageSavedMovies} />
             <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
          </div>
-        
+
       </section>
    );
 }

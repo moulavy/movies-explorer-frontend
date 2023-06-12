@@ -10,7 +10,6 @@ function Profile({ name }) {
          <Header linkActive="profile" isLoggedIn={isLoggedIn} />
          <section className="profile">
             <div className="profile__container">
-
                <h1 className="profile__title">Привет, {name}!</h1>
                <form className="profile__wrapper">
                   <div className="profile__group profile__name">

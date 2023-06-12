@@ -8,7 +8,7 @@ function ButtonMore() {
          <div className="button-more__container">
             <button className="button-more__button">Ещё</button>
          </div>
-     </div>
+      </div>
    );
 }
 

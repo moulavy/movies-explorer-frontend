@@ -31,12 +31,12 @@
     padding-right: 19px;
     height: 784px;
   }
-  .promo__title { 
-  margin: 326px 0 342px;
-}
+  .promo__title {
+    margin: 326px 0 342px;
+  }
   .promo__logo {
-  margin: 224px auto 240px;
-}
+    margin: 224px auto 240px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -53,11 +53,11 @@
     height: 570px;
   }
   .promo__logo {
-  margin: 142px auto 180px;
-  width: 248px;
-  height: 248px;
-}
-  
+    margin: 142px auto 180px;
+    width: 248px;
+    height: 248px;
+  }
+
   .promo__title {
     max-width: 300px;
     letter-spacing: -0.04em;

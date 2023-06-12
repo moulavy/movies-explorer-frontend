@@ -40,7 +40,7 @@
   font-size: 13px;
   line-height: 16px;
 }
-.footer__link:hover{
+.footer__link:hover {
   opacity: 0.7;
 }
 
@@ -57,33 +57,33 @@
     padding-left: 10px;
     height: 233px;
   }
-  .footer__description { 
-   text-align: center;
-  font-size: 12px;
-line-height: 15px;
-  border-bottom: 1px solid #424242;
-}
-.footer__content {
-   flex-direction: column-reverse;
-   justify-content: center;
-  margin: 30px auto 0;
-}
-.footer__list{
-   flex-direction: column;
-   margin-bottom: 30px;
-   gap:12px;
-}
-.footer__list-item{
-   margin: 0 auto;
-}
-.footer__link{
-   font-size: 12px;
-line-height: 15px;
-}
-.footer__year {
-   font-size: 12px;
-line-height: 15px;
-  margin: 0 auto;
-  color: #8B8B8B;
-}
+  .footer__description {
+    text-align: center;
+    font-size: 12px;
+    line-height: 15px;
+    border-bottom: 1px solid #424242;
+  }
+  .footer__content {
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin: 30px auto 0;
+  }
+  .footer__list {
+    flex-direction: column;
+    margin-bottom: 30px;
+    gap: 12px;
+  }
+  .footer__list-item {
+    margin: 0 auto;
+  }
+  .footer__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .footer__year {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 0 auto;
+    color: #8b8b8b;
+  }
 }

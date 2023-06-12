@@ -10,11 +10,11 @@ import Footer from '../Footer/Footer.js';
 function Movies() {
    const isLoggedIn = true;
    const isPageSavedMovies = false;
-   return (      
+   return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
          <SearchForm />
-         <MoviesCardList isPageSavedMovies={ isPageSavedMovies} />
+         <MoviesCardList isPageSavedMovies={isPageSavedMovies} />
          <ButtonMore />
          <Footer />
       </>

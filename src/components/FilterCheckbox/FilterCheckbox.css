@@ -1,6 +1,6 @@
 .checkbox {
   display: flex;
-  align-items:center;
+  align-items: center;
 }
 
 .checkbox__input {
@@ -16,10 +16,10 @@
 .checkbox__text {
   margin-left: 14px;
   font-weight: 400;
-font-size: 13px;
-line-height: 18px;
+  font-size: 13px;
+  line-height: 18px;
 }
-.checkbox__text:hover{
+.checkbox__text:hover {
   opacity: 0.7;
 }
 
@@ -32,7 +32,7 @@ line-height: 18px;
 }
 
 .checkbox__slider::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
