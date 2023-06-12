@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Header.css';
 import logoImg from '../../images/logo.svg';
-import iconProfileImg from '../../images/iconProfile.svg'
+import iconProfileImg from '../../images/iconProfile.svg';
 import { Link } from 'react-router-dom';
-
 
 function Header({ isLoggedIn }) {
    const [menu, setMenu] = useState(false);
+
+   const toggleMenu = () => {
+      setMenu(!menu);
+   };
+
+   useEffect(() => {
+      const pageElement = document.querySelector('.page');
+      if (pageElement) {
+         if (menu) {
+            pageElement.classList.add('menu-open');
+         } else {
+            pageElement.classList.remove('menu-open');
+         }
+      }
+   }, [menu]);
+
    return (
       <header className={(isLoggedIn ? 'header header-movies' : 'header header-main')}>
          <div className={(isLoggedIn ? 'header__container header__container-movies' : 'header__container header__container-main')}>
@@ -14,7 +29,7 @@ function Header({ isLoggedIn }) {
                <img src={logoImg} alt="лого" />
             </Link>
             {isLoggedIn && (
-               < button onClick={() => setMenu(!menu)} className={(menu ? "header__burger-close" : "header__burger-menu")} />
+               <button onClick={toggleMenu} className={(menu ? "header__burger-close" : "header__burger-menu")} />
             )}
             {isLoggedIn ? (
                <div className={(menu ? "header__content header__content_open" : "header__content")} >
@@ -25,18 +40,15 @@ function Header({ isLoggedIn }) {
                   </nav>
                   <div className="header__profile">
                      <Link to="/profile" className='header__profile-text'>Аккаунт</Link>
-                     <Link to="/profile" ><img className='header__profile-img' src={iconProfileImg} alt="иконка профиля" /></Link>
-
+                     <Link to="/profile"><img className='header__profile-img' src={iconProfileImg} alt="иконка профиля" /></Link>
                   </div>
-
                </div>
             ) : (
                <nav className='header__links'>
                   <Link to="/signup" className='header__registration'>Регистрация</Link>
                   <Link to="/signin" className='header__login'>Войти</Link>
                </nav>
-            )
-            }
+            )}
          </div>
       </header>
    );
