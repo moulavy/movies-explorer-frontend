@@ -120,6 +120,7 @@ line-height: 16px;
    width: 26px;
    height: 30px;
    background:#313131;
+   cursor: pointer;
 }
 @media screen and (max-width: 805px) {
 .header__burger-menu{

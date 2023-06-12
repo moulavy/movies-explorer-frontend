@@ -23,7 +23,7 @@ line-height: 16px;
 padding: 0;
 margin: 0;
 }
-.movie__like{
+.movie__button{
    width: 24px;
    height: 24px;
    border:none;
@@ -31,6 +31,7 @@ margin: 0;
    background-color:#313131;
    background-repeat:no-repeat;
    background-position: center;
+   cursor: pointer;
 }
 .movie__like_active{   
    background-image: url('../../images/like-active.svg');
@@ -38,6 +39,14 @@ margin: 0;
 .movie__like_inactive{   
    background-image: url('../../images/like.svg');
 }
+.movie__delete_disabled{
+   opacity: 0;  
+   background-image:url('../../images/buttonDelete.svg')
+}
+.movie__delete{
+   background-image:url('../../images/buttonDelete.svg')
+}
+
 .movie__time{
    font-weight: 400;
 font-size: 11px;

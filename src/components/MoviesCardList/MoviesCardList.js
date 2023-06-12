@@ -3,26 +3,26 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
-function MoviesCardList() {
+function MoviesCardList({isPageSavedMovies}) {
    return (
       <section className="movieslist">
          <div className="movieslist__container">
-            <MoviesCard /> 
-            <MoviesCard /> 
-            <MoviesCard /> 
-            <MoviesCard /> 
-            <MoviesCard /> 
-            <MoviesCard /> 
-            <MoviesCard /> 
-            <MoviesCard /> 
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies}/> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            <MoviesCard isPageSavedMovies={isPageSavedMovies} /> 
          </div>
         
       </section>
