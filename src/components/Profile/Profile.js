@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 function Profile({ name }) {
    const isLoggedIn = true;
+   const isEdit = false;
+   const isDisabled = false;
    return (
       <>
          <Header linkActive="profile" isLoggedIn={isLoggedIn} />
@@ -22,9 +24,14 @@ function Profile({ name }) {
                      <input autoComplete="off" type="email" id="email" className="profile__input profile__input-email" name="email"
                         required value="pochta@yandex.ru" />
                   </div>
-                  <button type="submit" className="profile__button">Редактировать</button>
+                  {isEdit ?
+                     <button type="submit" disabled={isDisabled} className={isDisabled ? "profile__button-save profile__button-save_disabled" : "profile__button-save"}>Сохранить</button>
+                  : <button type="submit" className="profile__button">Редактировать</button>                                       
+                  }
                </form>
-               <Link to="/" className="profile__logout">Выйти из аккаунта</Link>
+               { !isEdit &&
+                  <Link to="/" className="profile__logout">Выйти из аккаунта</Link>
+               }
             </div>
          </section>
       </>
