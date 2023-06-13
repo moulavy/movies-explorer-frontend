@@ -2,29 +2,33 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
+import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList({ isPageSavedMovies }) {
+   const isLoading = false;
    return (
       <section className="movieslist">
-         <div className="movieslist__container">
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-            <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-         </div>
-
+         {isLoading ? (<Preloader />) : (
+            <div className="movieslist__container">
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+            </div>
+         )
+         }
       </section>
    );
 }
