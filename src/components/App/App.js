@@ -11,6 +11,7 @@ import SavedMovies from '../SavedMovies/SavedMovies.js';
 import Profile from '../Profile/Profile.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js'
 function App() {
+   
    return (
       <div className="page">
          <Routes>
