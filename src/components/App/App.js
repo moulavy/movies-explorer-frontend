@@ -2,6 +2,7 @@ import React from 'react';
 import '../../index.css';
 import { Route, Routes } from 'react-router-dom';
 import Main from '../Main/Main.js';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js'
 
 import Movies from '../Movies/Movies.js';
 import Login from '../Login/Login.js';
