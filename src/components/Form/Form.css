@@ -74,6 +74,14 @@
 .form__button:hover {
   opacity: 0.8;
 }
+.form__button_disabled{
+   background: #424242;
+   color: #a2a2a2;
+   cursor:default;
+}
+.form__button_disabled:hover{
+ opacity: 1;
+}
 .form__question {
   display: flex;
   justify-content: center;
