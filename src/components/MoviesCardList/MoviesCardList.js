@@ -19,9 +19,9 @@ function MoviesCardList({ movies, isPageSavedMovies }) {
 
    useEffect(() => {
       const calculateCardsToShow = () => {
-         if (windowWidth >= 1000) {
-            setCardsToShow(12);
-         } else if (windowWidth >= 805) {
+         if (windowWidth >= 1280) {
+            setCardsToShow(16);
+         } else if (windowWidth >= 768) {
             setCardsToShow(8);
          } else {
             setCardsToShow(5);
