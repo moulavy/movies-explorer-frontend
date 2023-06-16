@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './MoviesCard.css';
 function MoviesCard({ movie,isPageSavedMovies }) {
    const [hovered, setHovered] = useState(false);
-
+const isLiked = true;
    const handleMouseEnter = () => {
       setHovered(true);
    };
@@ -15,14 +15,16 @@ function MoviesCard({ movie,isPageSavedMovies }) {
    const durationTransform = (duration) => {
       const hour = Math.floor(duration / 60);
       const minutes = duration % 60;
-      return `${hour}ч ${minutes}м`;
+      if (hour !== 0) {
+         return `${hour}ч ${minutes}м`;
+      }
+      else {
+         return `${minutes}м`;
+      }
 
    }
-   const handleLike=()=>{
-
-   }
-   // console.log(movie.image.url);
-   const isLiked = true;
+  
+   
    return (
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="movie">
          <img src={`https://api.nomoreparties.co/${movie.image.url}`} alt={movie.nameRU} className="movie__img" />

@@ -17,6 +17,7 @@ function SearchForm({movies,onSearch}) {
          setError('Нужно ввести ключевое слово')
       }
       else {
+         setError('');
          const searchRes = movies.filter((movie) => {
           return  movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
          })
