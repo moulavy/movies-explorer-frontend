@@ -14,7 +14,7 @@ function SearchForm() {
    const onSubmit = (e) => {
       e.preventDefault();
       if (inputSearch.trim() === '') {
-         setError('Введите ключевое слово.')
+         setError('Нужно ввести ключевое слово')
       }
    }
 

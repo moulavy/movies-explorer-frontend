@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../index.css';
 import { Route, Routes } from 'react-router-dom';
 import Main from '../Main/Main.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js'
 
+import {getMovies} from '../../utils/MovieApi.js'
 import Movies from '../Movies/Movies.js';
 import Login from '../Login/Login.js';
 import Register from '../Register/Register.js';
@@ -11,7 +12,12 @@ import SavedMovies from '../SavedMovies/SavedMovies.js';
 import Profile from '../Profile/Profile.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js'
 function App() {
-   
+   useEffect(() => {
+      getMovies()
+         .then((res) => {
+            console.log(res);
+      })
+   },[])
    return (
       <div className="page">
          <Routes>
