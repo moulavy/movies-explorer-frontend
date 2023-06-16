@@ -3,7 +3,7 @@ import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 
-function SearchForm() {
+function SearchForm({movies,onSearch}) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
    const [error, setError] = useState('');
@@ -16,6 +16,14 @@ function SearchForm() {
       if (inputSearch.trim() === '') {
          setError('Нужно ввести ключевое слово')
       }
+      else {
+         const searchRes = movies.filter((movie) => {
+          return  movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
+         })
+         console.log(searchRes);
+         onSearch(searchRes);
+      };
+      
    }
 
    useEffect(() => {

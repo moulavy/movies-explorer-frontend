@@ -6,14 +6,14 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
 import ButtonMore from '../ButtonMore/ButtonMore';
 
-function Movies({ movies }) {
+function Movies({searchMovies, movies,onSearch }) {
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-   const [cardsToShow, setCardsToShow] = useState(0);
+   const [moviesToShow, setMoviesToShow] = useState(0);
 
    const isLoading = false;
-   const visibleMovies = movies.slice(0, cardsToShow);
+   const visibleMovies = searchMovies.slice(0, moviesToShow);
 
    useEffect(() => {
       function handleResize() {
@@ -26,37 +26,38 @@ function Movies({ movies }) {
    }, []);
 
    useEffect(() => {
-      const calculateCardsToShow = () => {
+      const calculateMoviesToShow = () => {
          if (windowWidth >= 1280) {
-            setCardsToShow(16);
+            setMoviesToShow(16);
          } else if (windowWidth >= 768) {
-            setCardsToShow(8);
+            setMoviesToShow(8);
          } else {
-            setCardsToShow(5);
+            setMoviesToShow(5);
          }
       };
-      calculateCardsToShow();
+      calculateMoviesToShow();
    }, [windowWidth]);
 
    const handleShowMore = () => {
       if (windowWidth >= 1280) {
-         setCardsToShow(cardsToShow + 4);
+         setMoviesToShow(moviesToShow + 4);
       } else {
-         setCardsToShow(cardsToShow + 2);
+         setMoviesToShow(moviesToShow + 2);
       } 
       
    };
 
+   
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
-         <SearchForm />
+         <SearchForm  movies={movies } onSearch={onSearch}/>
          <MoviesCardList
             movies={visibleMovies}
             isPageSavedMovies={isPageSavedMovies}
             isLoading={isLoading}
          />
-         {movies.length > cardsToShow && (
+         {searchMovies.length > moviesToShow && (
             <ButtonMore handleShowMore={handleShowMore} />
          )}
          <Footer />

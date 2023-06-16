@@ -13,25 +13,29 @@ import Profile from '../Profile/Profile.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js'
 function App() {
    const [movies, setMovies] = useState([]);
+   const [searchMovies, setSearchMovies] = useState([]);
    useEffect(() => {
       getMovies()
          .then((res) => {
-            setMovies(res);
-            saveToLocal(movies);
+            saveToLocal(res.reverse());
+            getFromLocal();
          })
          .catch((err) => {
             console.log(err);
       })
-   }, [movies])
-   function saveToLocal(movies) {
-      localStorage.setItem('movies', JSON.stringify(movies));
+   }, [])
+   function saveToLocal(moviesList) {
+      localStorage.setItem('movies', JSON.stringify(moviesList));
    }
 
-   function getFromLocal() {
-      const localMovies = localStorage.getItem('movies');
-      
-      return localMovies ? JSON.parse(localMovies) : [];
+   function getFromLocal() {          
+      setMovies(JSON.parse(localStorage.getItem('movies')));    
    }
+
+   const handleSearchRes = (searchRes) => {
+      setSearchMovies(searchRes);
+   }
+
 
    return (
       <div className="page">
@@ -40,7 +44,7 @@ function App() {
             <Route path='/signin' element={<Login />} />
             <Route path='/signup' element={<Register />} />
             <Route path='/profile' element={<Profile name="Виталий" />} />
-            <Route path='/movies' element={<Movies movies={movies} />} />
+            <Route path='/movies' element={<Movies searchMovies={ searchMovies}  movies={movies} onSearch={handleSearchRes} />} />
             <Route path='/saved-movies' element={<SavedMovies />} />
             <Route path="*" element={<PageNotFound />} />
          </Routes>
