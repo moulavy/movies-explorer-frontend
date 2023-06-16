@@ -12,7 +12,7 @@ import Footer from '../Footer/Footer.js';
 function Main() {
    const isLoggedIn = false;
    return (
-      <>
+      <main className="main">
          <Header linkActive="home" isLoggedIn={isLoggedIn} />
          <Promo />
          <NavTab />
@@ -21,7 +21,7 @@ function Main() {
          <AboutMe />
          <Portfolio />
          <Footer />
-      </>
+      </main>
    );
 }
 

@@ -4,28 +4,15 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ isPageSavedMovies }) {
+function MoviesCardList({ movies, isPageSavedMovies }) {
    const isLoading = false;
    return (
       <section className="movieslist">
          {isLoading ? (<Preloader />) : (
             <div className="movieslist__container">
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
-               <MoviesCard isPageSavedMovies={isPageSavedMovies} />
+               {movies.map((movie) => (
+                  <MoviesCard isPageSavedMovies={isPageSavedMovies} movie={ movie} key={movie.id} />
+               ))}
             </div>
          )
          }

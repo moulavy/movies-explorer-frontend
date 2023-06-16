@@ -12,12 +12,19 @@ import SavedMovies from '../SavedMovies/SavedMovies.js';
 import Profile from '../Profile/Profile.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js'
 function App() {
+   const [movies, setMovies] = useState([]);
    useEffect(() => {
       getMovies()
          .then((res) => {
+            setMovies(res);
+            console.log(movies);
             console.log(res);
+         })
+         .catch((err) => {
+            console.log(err);
       })
-   },[])
+   }, [])
+
    return (
       <div className="page">
          <Routes>
@@ -25,7 +32,7 @@ function App() {
             <Route path='/signin' element={<Login />} />
             <Route path='/signup' element={<Register />} />
             <Route path='/profile' element={<Profile name="Виталий" />} />
-            <Route path='/movies' element={<Movies />} />
+            <Route path='/movies' element={<Movies movies={movies} />} />
             <Route path='/saved-movies' element={<SavedMovies />} />
             <Route path="*" element={<PageNotFound />} />
          </Routes>
