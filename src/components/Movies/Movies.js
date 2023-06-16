@@ -5,6 +5,7 @@ import SearchForm from '../SearchForm/SearchForm.js';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
 import ButtonMore from '../ButtonMore/ButtonMore';
+import NothingFound from '../NothingFound/NothingFound';
 
 function Movies({searchMovies, movies,onSearch }) {
    const isLoggedIn = true;
@@ -51,7 +52,10 @@ function Movies({searchMovies, movies,onSearch }) {
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
-         <SearchForm  movies={movies } onSearch={onSearch}/>
+         <SearchForm movies={movies} onSearch={onSearch} />
+         {( searchMovies.length===0 &&
+         <NothingFound/>
+         )}
          <MoviesCardList
             movies={visibleMovies}
             isPageSavedMovies={isPageSavedMovies}

@@ -21,7 +21,7 @@ function SearchForm({movies,onSearch}) {
          const searchRes = movies.filter((movie) => {
           return  movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
          })
-         console.log(searchRes);
+         
          onSearch(searchRes);
       };
       
