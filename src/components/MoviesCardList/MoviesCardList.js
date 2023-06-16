@@ -1,21 +1,53 @@
-//компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList({ movies, isPageSavedMovies }) {
+   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+   const [cardsToShow, setCardsToShow] = useState(0);
+
+   useEffect(() => {
+      function handleResize() {
+         setWindowWidth(window.innerWidth);
+      }
+      window.addEventListener('resize', handleResize);
+      return () => {
+         window.removeEventListener('resize', handleResize);
+      };
+   }, []);
+
+   useEffect(() => {
+      const calculateCardsToShow = () => {
+         if (windowWidth >= 1000) {
+            setCardsToShow(12);
+         } else if (windowWidth >= 805) {
+            setCardsToShow(8);
+         } else {
+            setCardsToShow(5);
+         }
+      };
+      calculateCardsToShow();
+   }, [windowWidth]);
+
    const isLoading = false;
+   const visibleMovies = movies.slice(0, cardsToShow);
+
    return (
       <section className="movieslist">
-         {isLoading ? (<Preloader />) : (
+         {isLoading ? (
+            <Preloader />
+         ) : (
             <div className="movieslist__container">
-               {movies.map((movie) => (
-                  <MoviesCard isPageSavedMovies={isPageSavedMovies} movie={ movie} key={movie.id} />
+               {visibleMovies.map((movie) => (
+                  <MoviesCard
+                     isPageSavedMovies={isPageSavedMovies}
+                     movie={movie}
+                     key={movie.id}
+                  />
                ))}
             </div>
-         )
-         }
+         )}
       </section>
    );
 }
