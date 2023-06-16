@@ -6,13 +6,16 @@ import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 function SearchForm() {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
+   const [error, setError] = useState('');
    const onChange = (e) => {
-      setInputSearch(e.target.value)
+      setInputSearch(e.target.value);     
    }
 
    const onSubmit = (e) => {
       e.preventDefault();
-      console.log(inputSearch)
+      if (inputSearch.trim() === '') {
+         setError('Введите ключевое слово.')
+      }
    }
 
    useEffect(() => {
@@ -32,7 +35,7 @@ function SearchForm() {
          <div className="search__container">
             <form className="search__form">
                <img className="search__icon" alt="иконка поиска" src={searchIcon} />
-               <input onChange={onChange} value={inputSearch} className="search__input" type="text" placeholder="Фильм" />
+               <input onChange={onChange} value={inputSearch} className="search__input" type="text" required placeholder="Фильм" />
                <div className="search__button-wrapper">
                   <button onClick={onSubmit} type="submit" className="search__button">
                      Найти
@@ -42,12 +45,12 @@ function SearchForm() {
             </form>
             {isMobileScreen && (
                <div className="search__filter-wrapper">
-                  <p className="search__error">Введите ключевое слово</p>
+                  <p className="search__error">{error}</p>
                   <FilterCheckBox />
                   
                </div>
-            )}
-            {!isMobileScreen && <p className="search__error">Введите ключевое слово</p>}
+            )}           
+            {!isMobileScreen &&  <p className="search__error">{error}</p>}
          </div>
       </section>
    );
