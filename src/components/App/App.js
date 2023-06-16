@@ -17,13 +17,21 @@ function App() {
       getMovies()
          .then((res) => {
             setMovies(res);
-            console.log(movies);
-            console.log(res);
+            saveToLocal(movies);
          })
          .catch((err) => {
             console.log(err);
       })
-   }, [])
+   }, [movies])
+   function saveToLocal(movies) {
+      localStorage.setItem('movies', JSON.stringify(movies));
+   }
+
+   function getFromLocal() {
+      const localMovies = localStorage.getItem('movies');
+      
+      return localMovies ? JSON.parse(localMovies) : [];
+   }
 
    return (
       <div className="page">
