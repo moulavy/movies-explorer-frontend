@@ -5,6 +5,15 @@ import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 
 function SearchForm() {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
+   const [inputSearch, setInputSearch] = useState('');
+   const onChange = (e) => {
+      setInputSearch(e.target.value)
+   }
+
+   const onSubmit = (e) => {
+      e.preventDefault();
+      console.log(inputSearch)
+   }
 
    useEffect(() => {
       function checkResolution() {
@@ -17,15 +26,15 @@ function SearchForm() {
          window.removeEventListener('resize', checkResolution);
       };
    }, []);
-
+   
    return (
       <section className="search">
          <div className="search__container">
             <form className="search__form">
                <img className="search__icon" alt="иконка поиска" src={searchIcon} />
-               <input className="search__input" type="text" placeholder="Фильм" />
+               <input onChange={onChange} value={inputSearch} className="search__input" type="text" placeholder="Фильм" />
                <div className="search__button-wrapper">
-                  <button type="submit" className="search__button">
+                  <button onClick={onSubmit} type="submit" className="search__button">
                      Найти
                   </button>
                </div>
@@ -33,9 +42,12 @@ function SearchForm() {
             </form>
             {isMobileScreen && (
                <div className="search__filter-wrapper">
+                  <p className="search__error">Введите ключевое слово</p>
                   <FilterCheckBox />
+                  
                </div>
             )}
+            {!isMobileScreen && <p className="search__error">Введите ключевое слово</p>}
          </div>
       </section>
    );

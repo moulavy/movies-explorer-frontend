@@ -6,6 +6,7 @@ import logo from '../../images/logo.svg';
 
 function Form({ link, title, children, textButton, question, linkText, classNameInputs }) {
    const isDisabled = false;
+  
    return (
       <section className="form">
          <div className='form__container'>
