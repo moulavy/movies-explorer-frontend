@@ -6,14 +6,14 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
 import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
+import Preloader from '../Preloader/Preloader';
 
-function Movies({searchMovies, movies,onSearch }) {
+function Movies({ isLoading, searchMovies, movies, onSearch }) {
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
    const [moviesToShow, setMoviesToShow] = useState(0);
-
-   const isLoading = false;
+   
    const visibleMovies = searchMovies.slice(0, moviesToShow);
 
    useEffect(() => {
@@ -44,26 +44,35 @@ function Movies({searchMovies, movies,onSearch }) {
          setMoviesToShow(moviesToShow + 4);
       } else {
          setMoviesToShow(moviesToShow + 2);
-      } 
-      
+      }
+
    };
 
-   
+
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
          <SearchForm movies={movies} onSearch={onSearch} />
-         {( searchMovies.length===0 &&
-         <NothingFound/>
+
+         {isLoading ? (<Preloader />) : (
+            <>
+               {(searchMovies.length === 0 &&
+                  <NothingFound />
+               )}
+
+               <MoviesCardList
+                  movies={visibleMovies}
+                  isPageSavedMovies={isPageSavedMovies}
+                  isLoading={isLoading}
+               />
+               {searchMovies.length > moviesToShow && (
+                  <ButtonMore handleShowMore={handleShowMore} />
+               )}
+
+            </>
          )}
-         <MoviesCardList
-            movies={visibleMovies}
-            isPageSavedMovies={isPageSavedMovies}
-            isLoading={isLoading}
-         />
-         {searchMovies.length > moviesToShow && (
-            <ButtonMore handleShowMore={handleShowMore} />
-         )}
+         
+         
          <Footer />
       </>
    );
