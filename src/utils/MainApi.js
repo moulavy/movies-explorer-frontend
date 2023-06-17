@@ -57,8 +57,7 @@ export const getUserInfo = () => {
    .then(checkResponse)
 }
 
-export const updateUserInfo = (data) => {
-   console.log(data)
+export const updateUserInfo = (data) => {   
    return fetch(`${BASE_URL_MAIN}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -70,6 +69,17 @@ export const updateUserInfo = (data) => {
          name: data.name,
          email: data.email,
       })
+   })
+      .then(checkResponse);
+}
+
+export const logout = () => {   
+   return fetch(`${BASE_URL_MAIN}/signout`, {      
+      headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+      },
+      credentials: 'include',      
    })
       .then(checkResponse);
 }

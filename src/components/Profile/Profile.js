@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile({ onUpdateUser }) {
+function Profile({ onUpdateUser,onLogout }) {
    const currentUser = React.useContext(CurrentUserContext);
    const isLoggedIn = true;
    const [isEdit,setIsEdit] = useState(false);
@@ -80,7 +80,7 @@ function Profile({ onUpdateUser }) {
                   }
                </form>
                { !isEdit &&
-                  <Link to="/" className="profile__logout">Выйти из аккаунта</Link>
+                  <Link onClick={onLogout} className="profile__logout">Выйти из аккаунта</Link>
                }
             </div>
          </section>

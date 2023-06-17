@@ -106,6 +106,15 @@ function App() {
             console.log(err);
          })
    }
+   const logoutCallback = () => {
+      mainApi.logout()
+         .then(() => {
+            setLoggedIn(false);
+            localStorage.removeItem('isAuth');
+            navigate("/signin", { replace: true });
+      })
+      
+   }
 
 
    return (
@@ -119,6 +128,7 @@ function App() {
                   loggedIn={loggedIn}
                   element={Profile}
                   onUpdateUser={handleUpdateUser}
+                  onLogout={logoutCallback}
                   name={name}
                   email={email} />} />
                <Route path='/movies'
