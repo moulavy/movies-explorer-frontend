@@ -8,7 +8,7 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ isLoading, searchMovies, movies, onSearch }) {
+function Movies({isSearch,isLoading, searchMovies, movies, onSearch }) {
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -52,11 +52,11 @@ function Movies({ isLoading, searchMovies, movies, onSearch }) {
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
-         <SearchForm movies={movies} onSearch={onSearch} />
+         <SearchForm  movies={movies} onSearch={onSearch} />
 
          {isLoading ? (<Preloader />) : (
             <>
-               {(searchMovies.length === 0 &&
+               {(isSearch && searchMovies.length === 0 &&
                   <NothingFound />
                )}
 

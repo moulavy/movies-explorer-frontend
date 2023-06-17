@@ -15,6 +15,7 @@ function App() {
    const [movies, setMovies] = useState([]);
    const [searchMovies, setSearchMovies] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
+   const [isSearch, setIsSearch] = useState(false);
    useEffect(() => {
       setIsLoading(true);
       getMovies()
@@ -38,6 +39,7 @@ function App() {
 
    const handleSearchRes = (searchRes) => {
       setSearchMovies(searchRes);
+      setIsSearch(true);
    }
 
 
@@ -48,7 +50,7 @@ function App() {
             <Route path='/signin' element={<Login />} />
             <Route path='/signup' element={<Register />} />
             <Route path='/profile' element={<Profile name="Виталий" />} />
-            <Route path='/movies' element={<Movies isLoading={isLoading} searchMovies={ searchMovies}  movies={movies} onSearch={handleSearchRes} />} />
+            <Route path='/movies' element={<Movies isSearch={isSearch} isLoading={isLoading} searchMovies={ searchMovies}  movies={movies} onSearch={handleSearchRes} />} />
             <Route path='/saved-movies' element={<SavedMovies />} />
             <Route path="*" element={<PageNotFound />} />
          </Routes>

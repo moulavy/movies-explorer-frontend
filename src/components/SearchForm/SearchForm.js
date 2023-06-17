@@ -7,6 +7,7 @@ function SearchForm({movies,onSearch}) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
    const [error, setError] = useState('');
+   
    const onChange = (e) => {
       setInputSearch(e.target.value);     
    }
@@ -21,7 +22,7 @@ function SearchForm({movies,onSearch}) {
          const searchRes = movies.filter((movie) => {
           return  movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
          })
-         
+        
          onSearch(searchRes);
       };
       
