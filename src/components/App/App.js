@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../index.css';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate} from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 import Main from '../Main/Main.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js'
@@ -24,7 +24,7 @@ function App() {
    const [name, setName] = useState('');
    const [currentUser, setCurrentUser] = useState({ data: { name: "Имя", email: "Email" } });
    const [loggedIn, setLoggedIn] = useState(false);
-
+  
    useEffect(() => {
       tokenCheckCallback();
       setIsLoading(true);
@@ -41,7 +41,6 @@ function App() {
             })
       }
    }, [loggedIn])
-
 
    function saveToLocal(moviesList) {
       localStorage.setItem('movies', JSON.stringify(moviesList));
