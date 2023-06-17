@@ -10,7 +10,7 @@ function Register({ onRegister }) {
    const [emailError, setEmailError] = React.useState('');
    const [nameError, setNameError] = React.useState('');
    const [passwordError, setPasswordError] = React.useState('');
-  
+   const [visibleButton, setVisibleButton] = React.useState(true);  
 
    function handleChangeEmail(e) {
       setEmail(e.target.value);
@@ -30,12 +30,17 @@ function Register({ onRegister }) {
       if (!email || !password || !name) {        
          return;
       }
-
       onRegister(email, name, password);
    }
+   useEffect(() => {
+      if (email && password && name && nameError === '' && emailError === '' && passwordError === '') {
+         setVisibleButton(false);
+         
+      }
+   },[email,name,password])
 
    return (
-      <Form onSubmit={ handleSubmit} link="/signin" classNameInputs="form__inputs_value_register" title="Добро пожаловать!" linkText="Войти" textButton="Зарегистрироваться" question="Уже зарегистрированы?" children={
+      <Form onSubmit={ handleSubmit} visibleButton={visibleButton} link="/signin" classNameInputs="form__inputs_value_register" title="Добро пожаловать!" linkText="Войти" textButton="Зарегистрироваться" question="Уже зарегистрированы?" children={
          <>
             <div className="form__group">
                <label className="form__label" htmlFor="name">Имя</label>

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import AuthTitle from '../AuthTitle/AuthTitle.js';
 import logo from '../../images/logo.svg';
 
-function Form({onSubmit, link, title, children, textButton, question, linkText, classNameInputs }) {
-   const isDisabled = false;
+function Form({onSubmit,visibleButton, link, title, children, textButton, question, linkText, classNameInputs }) {
+   
   
    return (
       <section className="form">
@@ -18,7 +18,7 @@ function Form({onSubmit, link, title, children, textButton, question, linkText, 
                <div className={classNameInputs}>
                   {children}
                </div>
-               <button type="submit"  disabled={isDisabled} className={isDisabled ? "form__button form__button_disabled" : "form__button"}>{textButton}</button>
+               <button type="submit"  disabled={visibleButton} className={visibleButton ? "form__button form__button_disabled" : "form__button"}>{textButton}</button>
             </form>
 
             <div className="form__question">
