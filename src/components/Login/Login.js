@@ -12,8 +12,7 @@ function Login({ onLogin }) {
       setEmail(e.target.value);
       setEmailError(e.target.validationMessage);
    }
-   function handleChangePassword(e) {
-     // console.log(password)
+   function handleChangePassword(e) {     
       setPassword(e.target.value);
       setPasswordError(e.target.validationMessage);
    }
@@ -22,8 +21,7 @@ function Login({ onLogin }) {
       e.preventDefault();
       if (!email || !password ) {
          return;
-      }
-     // console.log('handleSubmit:',email, password);
+      }    
       onLogin(email, password);
    }
    useEffect(() => {

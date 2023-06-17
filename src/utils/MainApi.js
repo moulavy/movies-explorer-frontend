@@ -50,9 +50,26 @@ export const getUserInfo = () => {
       method: 'GET',
       credentials: 'include',
       headers: {
-         Accept: 'application/json',
+         'Accept': 'application/json',
          'Content-Type': 'application/json'
       }
    })
    .then(checkResponse)
+}
+
+export const updateUserInfo = (data) => {
+   console.log(data)
+   return fetch(`${BASE_URL_MAIN}/users/me`, {
+      method: 'PATCH',
+      headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+         name: data.name,
+         email: data.email,
+      })
+   })
+      .then(checkResponse);
 }

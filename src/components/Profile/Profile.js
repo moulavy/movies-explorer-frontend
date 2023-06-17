@@ -2,25 +2,41 @@ import React from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile({ name }) {
+function Profile({ onUpdateUser }) {
+   const currentUser = React.useContext(CurrentUserContext);
    const isLoggedIn = true;
    const [isEdit,setIsEdit] = useState(false);
    const isDisabledButton = false;
-   const [isDisabledInput,setIsDisabledInput]=useState(true);
-   const [inputValueName, setInputValueName] = useState('Виталий');
-   const [inputValueEmail, setInputValueEmail] = useState('pochta@yandex.ru');
+   const [isDisabledInput, setIsDisabledInput] = useState(true);
+   const [name, setName] = useState('');
+   const [email, setEmail] = useState('');
+  
+   useEffect(() => {      
+      setName(currentUser.data.name);
+      setEmail(currentUser.data.email);
+      
+   }, [currentUser]);
+
    function editProfile(event) {
       event.preventDefault();
       setIsEdit(true);
       setIsDisabledInput(false);
    }
    function handleInputChangeName(event) {
-      setInputValueName(event.target.value);
+      setName(event.target.value);
    }
    function handleInputChangeEmail(event) {
-      setInputValueEmail(event.target.value);
+      setEmail(event.target.value);
+   }
+   function handleSubmit(e) {
+      e.preventDefault();
+      onUpdateUser({
+         name,
+         email,
+      });
    }
 
    return (
@@ -29,7 +45,7 @@ function Profile({ name }) {
          <section className="profile">
             <div className="profile__container">
                <h1 className="profile__title">Привет, {name}!</h1>
-               <form className="profile__wrapper">
+               <form onSubmit={ handleSubmit} className="profile__wrapper">
                   <div className="profile__group profile__name">
                      <label className="profile__label" htmlFor="name">Имя</label>
                      <input disabled={isDisabledInput}
@@ -41,7 +57,7 @@ function Profile({ name }) {
                         minLength="2"
                         maxLength="35"
                         required
-                        value={inputValueName}
+                        value={name || ''}
                         onChange={handleInputChangeName}
                      />
                   </div>
@@ -54,7 +70,7 @@ function Profile({ name }) {
                         className="profile__input profile__input-email"
                         name="email"
                         required
-                        value={inputValueEmail}
+                        value={email || ''}
                         onChange={handleInputChangeEmail}
                      />
                   </div>
