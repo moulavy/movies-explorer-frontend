@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AuthTitle from '../AuthTitle/AuthTitle.js';
 import logo from '../../images/logo.svg';
 
-function Form({ link, title, children, textButton, question, linkText, classNameInputs }) {
+function Form({onSubmit, link, title, children, textButton, question, linkText, classNameInputs }) {
    const isDisabled = false;
   
    return (
@@ -14,11 +14,11 @@ function Form({ link, title, children, textButton, question, linkText, className
                <img src={logo} alt="лого" className="form__logo" />
             </Link>
             <AuthTitle title={title} />
-            <form className='form__wrapper'>
+            <form onSubmit={ onSubmit} className='form__wrapper'>
                <div className={classNameInputs}>
                   {children}
                </div>
-               <button type="submit" disabled={isDisabled} className={isDisabled ? "form__button form__button_disabled" : "form__button"}>{textButton}</button>
+               <button type="submit"  disabled={isDisabled} className={isDisabled ? "form__button form__button_disabled" : "form__button"}>{textButton}</button>
             </form>
 
             <div className="form__question">
