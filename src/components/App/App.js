@@ -31,10 +31,11 @@ function App() {
       tokenCheckCallback();
       setIsLoading(true);
       if (loggedIn) {
-         Promise.all([mainApi.getUserInfo(), movieApi.getMovies()])
-            .then(([resUser, resMovies]) => {
+         Promise.all([mainApi.getUserInfo(), movieApi.getMovies(),mainApi.getMovies()])
+            .then(([resUser, resMovies,resSaveMovies]) => {
                setCurrentUser(resUser);
                saveToLocal(resMovies.reverse());
+               setSaveMovies(resSaveMovies);
                getFromLocal();
                setIsLoading(false);
             })

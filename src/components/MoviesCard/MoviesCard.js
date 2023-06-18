@@ -5,6 +5,7 @@ function MoviesCard({ onAddMovie,movie,isPageSavedMovies,movies,saveMovies }) {
    const [hovered, setHovered] = useState(false);
    
    const isLiked = saveMovies.some(savedMovie => savedMovie.movieId === movie.id);
+   
    const handleMouseEnter = () => {
       setHovered(true);
    };

@@ -108,3 +108,15 @@ export const addMovies=(data)=> {
    })
       .then(checkResponse);
 }
+
+export const getMovies = () => {
+   return fetch(`${BASE_URL_MAIN}/movies`, {
+      method: 'GET',
+      headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+   })
+      .then(checkResponse);
+}
