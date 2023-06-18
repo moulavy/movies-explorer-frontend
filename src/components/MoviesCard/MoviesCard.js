@@ -1,7 +1,7 @@
 //компонент одной карточки фильма
 import React, { useState } from 'react';
 import './MoviesCard.css';
-function MoviesCard({ movie,isPageSavedMovies }) {
+function MoviesCard({ onAddMovie,movie,isPageSavedMovies }) {
    const [hovered, setHovered] = useState(false);
 const isLiked = true;
    const handleMouseEnter = () => {
@@ -22,8 +22,7 @@ const isLiked = true;
          return `${minutes}м`;
       }
 
-   }
-  
+   } 
    
    return (
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="movie">
@@ -32,7 +31,7 @@ const isLiked = true;
             <h2 className="movie__title">{movie.nameRU}</h2>
             {(isPageSavedMovies ?
                <button className={(hovered ? "movie__button movie__delete" : "movie__button movie__delete_disabled")}></button> :
-               <button className={(isLiked ? "movie__button movie__like_active" : "movie__button movie__like_inactive")}></button>
+               <button onClick={onAddMovie} className={(isLiked ? "movie__button movie__like_active" : "movie__button movie__like_inactive")}></button>
             )}
          </div>
          <p className="movie__time">{ durationTransform(movie.duration)}</p>

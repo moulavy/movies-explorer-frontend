@@ -18,6 +18,7 @@ function App() {
    const navigate = useNavigate();
 
    const [movies, setMovies] = useState([]);
+   const [saveMovies, setSaveMovies] = useState([]);
    const [searchMovies, setSearchMovies] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
    const [isSearch, setIsSearch] = useState(false);
@@ -34,6 +35,7 @@ function App() {
             .then(([resUser, resMovies]) => {
                setCurrentUser(resUser);
                saveToLocal(resMovies.reverse());
+               getFromLocal();
                setIsLoading(false);
             })
             .catch((err) => {
@@ -43,19 +45,24 @@ function App() {
       }
    }, [loggedIn])
 
-   function saveToLocal(moviesList) {
+   const saveToLocal=(moviesList) =>{
       localStorage.setItem('movies', JSON.stringify(moviesList));
    }
 
-   function getFromLocal() {
+   const getFromLocal=() =>{
       setMovies(JSON.parse(localStorage.getItem('movies')));
    }
 
-   const handleSearchRes = (searchRes) => {
-      getFromLocal();
+   function handleSearchRes(searchRes) {
+      setIsLoading(true);
+      setIsLoading(true);           
       setSearchMovies(searchRes);
       setIsSearch(true);
+      setIsLoading(false);
+      
    }
+   
+
 
    const registerCallback = (email, name, password) => {
       mainApi.register(email, name, password)
@@ -97,7 +104,7 @@ function App() {
       }
    }
 
-   function handleUpdateUser(data) {
+   const handleUpdateUser=(data)=> {
       mainApi.updateUserInfo(data)
          .then((res) => {
             setCurrentUser(res);
@@ -116,7 +123,15 @@ function App() {
       
    }
 
-
+   const handleAddMovie=(data)=> {      
+      mainApi.addMovies(data)
+         .then((newMovie) => {
+            setSaveMovies([newMovie.data, ...saveMovies]);         
+         })
+         .catch((err) => {
+            console.log(err);
+         })
+   }
    return (
       <div className="page">
          <CurrentUserContext.Provider value={currentUser}>
@@ -135,6 +150,7 @@ function App() {
                   element={<ProtectedRoute
                      loggedIn={loggedIn}
                      element={Movies}
+                     onAddMovie={handleAddMovie}
                      isSearch={isSearch}
                      isLoading={isLoading}
                      searchMovies={searchMovies}

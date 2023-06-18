@@ -83,3 +83,28 @@ export const logout = () => {
    })
       .then(checkResponse);
 }
+
+export const addMovies=(data)=> {
+   return fetch(`${BASE_URL_MAIN}/movies`, {
+      method: 'POST',
+      headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+         country:data.country,
+         director: data.director,
+         duration: data.duration,
+         year: data.year,
+         description: data.description,
+         image: data.image,
+         trailerLink: data.trailerLink,
+         nameRU: data.nameRU,
+         nameEN: data.nameEN,
+         thumbnail: data.thumbnail,
+         movieId: data.movieId
+      })
+   })
+      .then(checkResponse);
+}

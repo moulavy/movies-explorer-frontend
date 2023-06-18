@@ -8,7 +8,7 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({isSearch,isLoading, searchMovies, movies, onSearch }) {
+function Movies({onAddMovie,isSearch,isLoading, searchMovies, movies, onSearch }) {
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -47,8 +47,6 @@ function Movies({isSearch,isLoading, searchMovies, movies, onSearch }) {
       }
 
    };
-
-
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
@@ -61,6 +59,7 @@ function Movies({isSearch,isLoading, searchMovies, movies, onSearch }) {
                )}
 
                <MoviesCardList
+                  onAddMovie={onAddMovie}
                   movies={visibleMovies}
                   isPageSavedMovies={isPageSavedMovies}
                   isLoading={isLoading}

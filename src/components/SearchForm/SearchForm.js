@@ -3,13 +3,14 @@ import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 
-function SearchForm({movies,onSearch}) {
+function SearchForm({ movies, onSearch }) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
    const [error, setError] = useState('');
    
+
    const onChange = (e) => {
-      setInputSearch(e.target.value);     
+      setInputSearch(e.target.value);
    }
 
    const onSubmit = (e) => {
@@ -20,12 +21,12 @@ function SearchForm({movies,onSearch}) {
       else {
          setError('');
          const searchRes = movies.filter((movie) => {
-          return  movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
+            return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
          })
-        
+
          onSearch(searchRes);
       };
-      
+
    }
 
    useEffect(() => {
@@ -39,7 +40,7 @@ function SearchForm({movies,onSearch}) {
          window.removeEventListener('resize', checkResolution);
       };
    }, []);
-   
+
    return (
       <section className="search">
          <div className="search__container">
@@ -57,10 +58,10 @@ function SearchForm({movies,onSearch}) {
                <div className="search__filter-wrapper">
                   <p className="search__error">{error}</p>
                   <FilterCheckBox />
-                  
+
                </div>
-            )}           
-            {!isMobileScreen &&  <p className="search__error">{error}</p>}
+            )}
+            {!isMobileScreen && <p className="search__error">{error}</p>}
          </div>
       </section>
    );
