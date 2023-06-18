@@ -1,7 +1,7 @@
 //компонент одной карточки фильма
 import React, { useState } from 'react';
 import './MoviesCard.css';
-function MoviesCard({ onAddMovie,movie,isPageSavedMovies,movies,saveMovies }) {
+function MoviesCard({ onDeleteMovie, onAddMovie,movie,isPageSavedMovies,movies,saveMovies }) {
    const [hovered, setHovered] = useState(false);
    
    const isLiked = saveMovies.some(savedMovie => savedMovie.movieId === movie.id);
@@ -27,7 +27,13 @@ function MoviesCard({ onAddMovie,movie,isPageSavedMovies,movies,saveMovies }) {
    } 
    const onLike = (e) => {
       e.preventDefault();
-      onAddMovie(movie)
+      if (!isLiked) {
+         onAddMovie(movie)
+      }
+      else {
+         const movieToDelete = saveMovies.find(item => movie.id === item.movieId);         
+         onDeleteMovie(movieToDelete);
+      }
    }
    
    return (

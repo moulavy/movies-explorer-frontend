@@ -120,3 +120,15 @@ export const getMovies = () => {
    })
       .then(checkResponse);
 }
+
+export const deleteMovie = (id) => {   
+   return fetch(`${BASE_URL_MAIN}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+   })
+      .then(checkResponse);
+}

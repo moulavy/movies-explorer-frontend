@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../index.css';
-import { Route, Routes, useNavigate} from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 import Main from '../Main/Main.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js'
@@ -26,13 +26,13 @@ function App() {
    const [name, setName] = useState('');
    const [currentUser, setCurrentUser] = useState({ data: { name: "Имя", email: "Email" } });
    const [loggedIn, setLoggedIn] = useState(false);
-  
+
    useEffect(() => {
       tokenCheckCallback();
       setIsLoading(true);
       if (loggedIn) {
-         Promise.all([mainApi.getUserInfo(), movieApi.getMovies(),mainApi.getMovies()])
-            .then(([resUser, resMovies,resSaveMovies]) => {
+         Promise.all([mainApi.getUserInfo(), movieApi.getMovies(), mainApi.getMovies()])
+            .then(([resUser, resMovies, resSaveMovies]) => {
                setCurrentUser(resUser);
                saveToLocal(resMovies.reverse());
                setSaveMovies(resSaveMovies);
@@ -46,23 +46,22 @@ function App() {
       }
    }, [loggedIn])
 
-   const saveToLocal=(moviesList) =>{
+   const saveToLocal = (moviesList) => {
       localStorage.setItem('movies', JSON.stringify(moviesList));
    }
 
-   const getFromLocal=() =>{
+   const getFromLocal = () => {
       setMovies(JSON.parse(localStorage.getItem('movies')));
    }
 
    function handleSearchRes(searchRes) {
       setIsLoading(true);
-      setIsLoading(true);           
+      setIsLoading(true);
       setSearchMovies(searchRes);
       setIsSearch(true);
       setIsLoading(false);
-      
+
    }
-   
 
 
    const registerCallback = (email, name, password) => {
@@ -105,7 +104,7 @@ function App() {
       }
    }
 
-   const handleUpdateUser=(data)=> {
+   const handleUpdateUser = (data) => {
       mainApi.updateUserInfo(data)
          .then((res) => {
             setCurrentUser(res);
@@ -120,20 +119,30 @@ function App() {
             setLoggedIn(false);
             localStorage.removeItem('isAuth');
             navigate("/signin", { replace: true });
-      })
-      
+         })
+
    }
 
-   const handleAddMovie = (data) => {  
-      
+   const handleAddMovie = (data) => {
       mainApi.addMovies(data)
          .then((newMovie) => {
-            setSaveMovies([newMovie.data, ...saveMovies]);              
+            setSaveMovies([newMovie.data, ...saveMovies]);
          })
          .catch((err) => {
             console.log(err);
          })
    }
+
+   const handleDeleteMovie = (movie) => {
+     console.log()
+      mainApi.deleteMovie(movie._id)
+         .then(()=> {
+            const newMovies = saveMovies.filter((item) => movie._id !== item._id);
+            setSaveMovies(newMovies);
+      })
+   }
+
+
    return (
       <div className="page">
          <CurrentUserContext.Provider value={currentUser}>
@@ -152,6 +161,7 @@ function App() {
                   element={<ProtectedRoute
                      loggedIn={loggedIn}
                      element={Movies}
+                     onDeleteMovie={handleDeleteMovie}
                      saveMovies={saveMovies}
                      onAddMovie={handleAddMovie}
                      isSearch={isSearch}
@@ -162,7 +172,7 @@ function App() {
                <Route path='/saved-movies'
                   element={<ProtectedRoute
                      loggedIn={loggedIn}
-                  element={SavedMovies}/> } />
+                     element={SavedMovies} />} />
                <Route path="*" element={<PageNotFound />} />
             </Routes>
          </CurrentUserContext.Provider>
