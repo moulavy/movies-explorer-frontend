@@ -123,10 +123,11 @@ function App() {
       
    }
 
-   const handleAddMovie=(data)=> {      
+   const handleAddMovie = (data) => {  
+      
       mainApi.addMovies(data)
          .then((newMovie) => {
-            setSaveMovies([newMovie.data, ...saveMovies]);         
+            setSaveMovies([newMovie.data, ...saveMovies]);              
          })
          .catch((err) => {
             console.log(err);
@@ -150,6 +151,7 @@ function App() {
                   element={<ProtectedRoute
                      loggedIn={loggedIn}
                      element={Movies}
+                     saveMovies={saveMovies}
                      onAddMovie={handleAddMovie}
                      isSearch={isSearch}
                      isLoading={isLoading}

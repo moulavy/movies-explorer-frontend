@@ -8,7 +8,7 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({onAddMovie,isSearch,isLoading, searchMovies, movies, onSearch }) {
+function Movies({onAddMovie,isSearch,isLoading, searchMovies, movies,saveMovies, onSearch }) {
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -59,8 +59,10 @@ function Movies({onAddMovie,isSearch,isLoading, searchMovies, movies, onSearch }
                )}
 
                <MoviesCardList
+                  saveMovies={saveMovies}
+                  movies={movies}
                   onAddMovie={onAddMovie}
-                  movies={visibleMovies}
+                  visibleMovies={visibleMovies}
                   isPageSavedMovies={isPageSavedMovies}
                   isLoading={isLoading}
                />
