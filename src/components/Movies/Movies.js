@@ -60,10 +60,10 @@ function Movies({onDeleteMovie, onAddMovie,isSearch,isLoading, searchMovies, mov
 
                <MoviesCardList
                   saveMovies={saveMovies}
-                  movies={movies}
+                 
                   onAddMovie={onAddMovie}
                   onDeleteMovie={onDeleteMovie}
-                  visibleMovies={visibleMovies}
+                  movies={visibleMovies}
                   isPageSavedMovies={isPageSavedMovies}
                   isLoading={isLoading}
                />

@@ -7,15 +7,14 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import ButtonMore from '../ButtonMore/ButtonMore.js'
 import Footer from '../Footer/Footer.js';
 
-function SavedMovies() {
-   const isLoggedIn = true;
+function SavedMovies({loggedIn,saveMovies,onDeleteMovie}) {
+  
    const isPageSavedMovies = true;
    return (
       <>
-         <Header linkActive="saved-movies" isLoggedIn={isLoggedIn} />
+         <Header linkActive="saved-movies" isLoggedIn={loggedIn} />
          <SearchForm />
-         <MoviesCardList isPageSavedMovies={isPageSavedMovies} />
-         <ButtonMore />
+         <MoviesCardList onDeleteMovie={onDeleteMovie} movies={ saveMovies} saveMovies={saveMovies} isPageSavedMovies={isPageSavedMovies} />
          <Footer />
       </>
    );

@@ -3,18 +3,17 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({onDeleteMovie, saveMovies,onAddMovie, movies,visibleMovies, isPageSavedMovies,  }) {
+function MoviesCardList({onDeleteMovie, saveMovies,onAddMovie, movies, isPageSavedMovies,  }) {
    return (
       <section className="movieslist">          
             <div className="movieslist__container">
-            {visibleMovies.map((movie) => (
+            {movies.map((movie) => (
                <MoviesCard
                   onAddMovie={onAddMovie}
                   onDeleteMovie={onDeleteMovie}
                   isPageSavedMovies={isPageSavedMovies}
                   movie={movie}
-                  key={movie.id}
-                  movies={movies}
+                  key={movie.id}                  
                   saveMovies={saveMovies}
                />
             ))}

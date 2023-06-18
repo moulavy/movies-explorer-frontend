@@ -172,7 +172,10 @@ function App() {
                <Route path='/saved-movies'
                   element={<ProtectedRoute
                      loggedIn={loggedIn}
-                     element={SavedMovies} />} />
+                     element={SavedMovies}
+                     saveMovies={saveMovies}
+                     onDeleteMovie={handleDeleteMovie}
+                  />} />
                <Route path="*" element={<PageNotFound />} />
             </Routes>
          </CurrentUserContext.Provider>
