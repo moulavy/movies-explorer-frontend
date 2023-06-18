@@ -14,16 +14,18 @@ function SearchForm({ movies, onSearch }) {
    }
 
    const onSubmit = (e) => {
+      
       e.preventDefault();
       if (inputSearch.trim() === '') {
          setError('Нужно ввести ключевое слово')
       }
       else {
+         
          setError('');
          const searchRes = movies.filter((movie) => {
             return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
          })
-
+         
          onSearch(searchRes);
       };
 

@@ -14,14 +14,10 @@ import SavedMovies from '../SavedMovies/SavedMovies.js';
 import Profile from '../Profile/Profile.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js'
 function App() {
-
    const navigate = useNavigate();
-
    const [movies, setMovies] = useState([]);
-   const [saveMovies, setSaveMovies] = useState([]);
-   const [searchMovies, setSearchMovies] = useState([]);
-   const [isLoading, setIsLoading] = useState(false);
-   const [isSearch, setIsSearch] = useState(false);
+   const [saveMovies, setSaveMovies] = useState([]);   
+   const [isLoading, setIsLoading] = useState(false);   
    const [email, setEmail] = useState('');
    const [name, setName] = useState('');
    const [currentUser, setCurrentUser] = useState({ data: { name: "Имя", email: "Email" } });
@@ -52,15 +48,6 @@ function App() {
 
    const getFromLocal = () => {
       setMovies(JSON.parse(localStorage.getItem('movies')));
-   }
-
-   function handleSearchRes(searchRes) {
-      setIsLoading(true);
-      setIsLoading(true);
-      setSearchMovies(searchRes);
-      setIsSearch(true);
-      setIsLoading(false);
-
    }
 
 
@@ -163,12 +150,10 @@ function App() {
                      element={Movies}
                      onDeleteMovie={handleDeleteMovie}
                      saveMovies={saveMovies}
-                     onAddMovie={handleAddMovie}
-                     isSearch={isSearch}
-                     isLoading={isLoading}
-                     searchMovies={searchMovies}
+                     onAddMovie={handleAddMovie}                   
+                     isLoading={isLoading}                     
                      movies={movies}
-                     onSearch={handleSearchRes} />} />
+                     />} />
                <Route path='/saved-movies'
                   element={<ProtectedRoute
                      loggedIn={loggedIn}

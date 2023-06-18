@@ -8,7 +8,10 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({onDeleteMovie, onAddMovie,isSearch,isLoading, searchMovies, movies,saveMovies, onSearch }) {
+function Movies({ onDeleteMovie, onAddMovie,  isLoading,  movies, saveMovies }) {
+   const [searchMovies, setSearchMovies] = useState([]);
+   const [isSearch, setIsSearch] = useState(false);
+  
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -39,6 +42,11 @@ function Movies({onDeleteMovie, onAddMovie,isSearch,isLoading, searchMovies, mov
       calculateMoviesToShow();
    }, [windowWidth]);
 
+   function handleSearchRes(searchRes) {      
+      setSearchMovies(searchRes);
+      setIsSearch(true); 
+   }
+
    const handleShowMore = () => {
       if (windowWidth >= 1280) {
          setMoviesToShow(moviesToShow + 4);
@@ -50,7 +58,7 @@ function Movies({onDeleteMovie, onAddMovie,isSearch,isLoading, searchMovies, mov
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
-         <SearchForm  movies={movies} onSearch={onSearch} />
+         <SearchForm  movies={movies} onSearch={handleSearchRes} />
 
          {isLoading ? (<Preloader />) : (
             <>
@@ -59,8 +67,7 @@ function Movies({onDeleteMovie, onAddMovie,isSearch,isLoading, searchMovies, mov
                )}
 
                <MoviesCardList
-                  saveMovies={saveMovies}
-                 
+                  saveMovies={saveMovies}                 
                   onAddMovie={onAddMovie}
                   onDeleteMovie={onDeleteMovie}
                   movies={visibleMovies}

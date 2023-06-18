@@ -13,7 +13,7 @@ function MoviesCardList({onDeleteMovie, saveMovies,onAddMovie, movies, isPageSav
                   onDeleteMovie={onDeleteMovie}
                   isPageSavedMovies={isPageSavedMovies}
                   movie={movie}
-                  key={movie.id}                  
+                  key={isPageSavedMovies ? movie._id : movie.id}                  
                   saveMovies={saveMovies}
                />
             ))}
