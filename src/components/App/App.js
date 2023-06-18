@@ -14,6 +14,7 @@ import SavedMovies from '../SavedMovies/SavedMovies.js';
 import Profile from '../Profile/Profile.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js'
 function App() {
+
    const navigate = useNavigate();
 
    const [movies, setMovies] = useState([]);
@@ -120,7 +121,7 @@ function App() {
       <div className="page">
          <CurrentUserContext.Provider value={currentUser}>
             <Routes>
-               <Route path='/' element={<Main />} />
+               <Route path='/' element={<Main isLoggedIn={loggedIn} />} />
                <Route path='/signin' element={<Login onLogin={loginCallback} />} />
                <Route path='/signup' element={<Register onRegister={registerCallback} />} />
                <Route path='/profile' element={<ProtectedRoute

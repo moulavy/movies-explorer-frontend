@@ -9,8 +9,7 @@ import Portfolio from '../Portfolio/Portfolio.js';
 import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js';
 
-function Main() {
-   const isLoggedIn = false;
+function Main({isLoggedIn}) {
    return (
       <main className="main">
          <Header linkActive="home" isLoggedIn={isLoggedIn} />
