@@ -8,7 +8,7 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ onDeleteMovie, onAddMovie,  isLoading,  movies, saveMovies }) {
+function Movies({onGetMovies, onDeleteMovie, onAddMovie,  isLoading,  movies,setMovies, saveMovies }) {
    const [searchMovies, setSearchMovies] = useState([]);
    const [isSearch, setIsSearch] = useState(false);
   
@@ -75,7 +75,12 @@ function Movies({ onDeleteMovie, onAddMovie,  isLoading,  movies, saveMovies }) 
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
-         <SearchForm onChangeFilterShort={handleChangeFilterShort} movies={movies} onSearch={handleSearchRes} />
+         <SearchForm isPageSavedMovie={isPageSavedMovies}
+            onGetMovies={onGetMovies}
+            onChangeFilterShort={handleChangeFilterShort}
+            movies={movies}
+            setMovies={setMovies}
+            onSearch={handleSearchRes} />
 
          {isLoading ? (<Preloader />) : (
             <>

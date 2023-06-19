@@ -3,7 +3,7 @@ import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 
-function SearchForm({ movies, onSearch, onChangeFilterShort }) {
+function SearchForm({ onGetMovies,movies,setMovies, onSearch, onChangeFilterShort }) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
    const [error, setError] = useState('');   
@@ -19,6 +19,12 @@ function SearchForm({ movies, onSearch, onChangeFilterShort }) {
       }
       else {         
          setError('');
+         const isMoviesEmpty = localStorage.getItem('movies') === null || JSON.parse(localStorage.getItem('movies')).length === 0;
+         console.log(isMoviesEmpty);
+         if (isMoviesEmpty) {
+            onGetMovies();
+         }      
+         setMovies(JSON.parse(localStorage.getItem('movies')));
          const searchRes = movies.filter((movie) => {
             return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
          })         

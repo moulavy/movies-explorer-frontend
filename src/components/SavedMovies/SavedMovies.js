@@ -44,7 +44,7 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    return (
       <>
          <Header linkActive="saved-movies" isLoggedIn={loggedIn} />
-         <SearchForm onChangeFilterShort={handleChangeFilterShort} movies={saveMovies} onSearch={handleSearchRes} />
+         <SearchForm isPageSavedMovie={isPageSavedMovies} onChangeFilterShort={handleChangeFilterShort} movies={saveMovies} onSearch={handleSearchRes} />
          {isLoading ? (<Preloader />) : (
             <>
                {(isSearch && filteredMovies.length === 0 &&

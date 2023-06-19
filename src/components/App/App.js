@@ -29,12 +29,14 @@ function App() {
       tokenCheckCallback();
       setIsLoading(true);
       if (loggedIn) {
-         Promise.all([mainApi.getUserInfo(), movieApi.getMovies(), mainApi.getMovies()])
-            .then(([resUser, resMovies, resSaveMovies]) => {
+         Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
+            .then(([resUser, resSaveMovies]) => {
+               const isMoviesEmpty = localStorage.getItem('movies') === undefined;
+               if (!isMoviesEmpty) {
+                  setMovies(JSON.parse(localStorage.getItem('movies')));
+               }
                setCurrentUser(resUser);
-               saveToLocal(resMovies.reverse());
-               setSaveMovies(resSaveMovies);
-               getFromLocal();
+               setSaveMovies(resSaveMovies);              
             })
             .catch((err) => {
                console.log(err);
@@ -49,8 +51,18 @@ function App() {
       localStorage.setItem('movies', JSON.stringify(moviesList));
    }
 
-   const getFromLocal = () => {
-      setMovies(JSON.parse(localStorage.getItem('movies')));
+   // const getFromLocal = () => {
+   //    setMovies(JSON.parse(localStorage.getItem('movies')));
+   // }
+   const handleGetMovies = () => {
+      movieApi.getMovies()
+         .then((resMovies) => {
+            saveToLocal(resMovies.reverse());
+            // getFromLocal();
+         })
+         .catch((err) => {
+            console.log(err);
+         })      
    }
 
 
@@ -129,6 +141,7 @@ function App() {
          .then(() => {
             setLoggedIn(false);
             localStorage.removeItem('isAuth');
+            localStorage.removeItem('movies');
             navigate("/signin", { replace: true });
          })
          .catch((err) => {
@@ -189,6 +202,7 @@ function App() {
                   email={email} />} />
                <Route path='/movies'
                   element={<ProtectedRoute
+                     onGetMovies={handleGetMovies}
                      loggedIn={loggedIn}
                      element={Movies}
                      onDeleteMovie={handleDeleteMovie}
@@ -196,6 +210,7 @@ function App() {
                      onAddMovie={handleAddMovie}
                      isLoading={isLoading}
                      movies={movies}
+                     setMovies={setMovies}
                   />} />
                <Route path='/saved-movies'
                   element={<ProtectedRoute
