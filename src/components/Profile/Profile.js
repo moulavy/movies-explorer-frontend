@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile({ onUpdateUser,onLogout }) {
+function Profile({ onUpdateUser,onLogout,error,setError }) {
    const currentUser = React.useContext(CurrentUserContext);
    const isLoggedIn = true;
    const [isEdit,setIsEdit] = useState(false);
@@ -13,7 +13,11 @@ function Profile({ onUpdateUser,onLogout }) {
    const [isDisabledInput, setIsDisabledInput] = useState(true);
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
-  
+   useEffect(() => {
+      return () => {
+         setError(''); // сброс ошибки при размонтировании компонента
+      };
+   }, []);
    useEffect(() => {      
       setName(currentUser.data.name);
       setEmail(currentUser.data.email);
@@ -75,7 +79,8 @@ function Profile({ onUpdateUser,onLogout }) {
                      />
                   </div>
                   {isEdit ?
-                     <button type="submit" disabled={isDisabledButton} className={isDisabledButton ? "profile__button-save profile__button-save_disabled" : "profile__button-save"}>Сохранить</button>
+                     <>{ <p className="profile__button-error">{error}</p>}
+                        <button type="submit" disabled={isDisabledButton} className={isDisabledButton ? "profile__button-save profile__button-save_disabled" : "profile__button-save"}>Сохранить</button></>
                      : <button type="button" onClick={ editProfile} className="profile__button">Редактировать</button>                                       
                   }
                </form>

@@ -76,7 +76,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 223px auto 0;
+  margin: 0px auto 0;
   color: #fff;
   width: 100%;
   border: none;
@@ -98,6 +98,16 @@
 }
 .profile__button-save_disabled:hover{
  opacity: 1;
+}
+.profile__button-error{
+  margin: 210px auto 15px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  height: 12px;
+  height:12px;
+  color: #ee3465;
+  padding: 0;
 }
 .profile__logout {
   display: flex;

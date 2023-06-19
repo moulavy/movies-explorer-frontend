@@ -113,9 +113,11 @@ function App() {
       mainApi.updateUserInfo(data)
          .then((res) => {
             setCurrentUser(res);
+            setError('Данные успешно обновлены.');
          })
          .catch((err) => {
             console.log(err);
+            setError(err.message);
          })
          .finally(() => {
             setIsLoading(false);
@@ -181,6 +183,8 @@ function App() {
                   onRegister={registerCallback}
                   error={ error} />} />
                <Route path='/profile' element={<ProtectedRoute
+                  error={error}
+                  setError={setError}
                   loggedIn={loggedIn}
                   element={Profile}
                   onUpdateUser={handleUpdateUser}

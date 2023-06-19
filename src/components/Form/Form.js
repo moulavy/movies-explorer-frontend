@@ -17,7 +17,7 @@ function Form({error,onSubmit,visibleButton, link, title, children, textButton, 
                <div className={classNameInputs}>
                   {children}
                </div>
-              {error!=='' && <span className="form__button-error">{error}</span>}
+               <p className="form__button-error">{error}</p>
                <button type="submit"  disabled={visibleButton} className={visibleButton ? "form__button form__button_disabled" : "form__button"}>{textButton}</button>
             </form>
 
