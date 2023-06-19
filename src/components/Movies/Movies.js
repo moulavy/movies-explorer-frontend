@@ -69,10 +69,8 @@ function Movies({ onDeleteMovie, onAddMovie,  isLoading,  movies, saveMovies }) 
    const visibleMovies = filteredMovies.slice(0, moviesToShow);
    
 
-   function handleChangeFilterShort(value) {
-      
-      setIsShortFilmChecked(value);
-  
+   function handleChangeFilterShort(value) {      
+      setIsShortFilmChecked(value);  
    }
    return (
       <>
