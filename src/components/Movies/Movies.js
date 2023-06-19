@@ -16,8 +16,8 @@ function Movies({ onDeleteMovie, onAddMovie,  isLoading,  movies, saveMovies }) 
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
    const [moviesToShow, setMoviesToShow] = useState(0);
-   
-   const visibleMovies = searchMovies.slice(0, moviesToShow);
+   const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
+  
 
    useEffect(() => {
       function handleResize() {
@@ -42,6 +42,7 @@ function Movies({ onDeleteMovie, onAddMovie,  isLoading,  movies, saveMovies }) 
       calculateMoviesToShow();
    }, [windowWidth]);
 
+   /*массив найденных через поиск фильмов*/
    function handleSearchRes(searchRes) {      
       setSearchMovies(searchRes);
       setIsSearch(true); 
@@ -55,14 +56,32 @@ function Movies({ onDeleteMovie, onAddMovie,  isLoading,  movies, saveMovies }) 
       }
 
    };
+
+   const filterMovies = (movies) => {      
+      if (isShortFilmChecked) {         
+         return movies.filter((movie) => movie.duration <= 40);          
+      } else {
+         return movies;
+      }
+   };
+
+   const filteredMovies = filterMovies(searchMovies);
+   const visibleMovies = filteredMovies.slice(0, moviesToShow);
+   
+
+   function handleChangeFilterShort(value) {
+      
+      setIsShortFilmChecked(value);
+  
+   }
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
-         <SearchForm  movies={movies} onSearch={handleSearchRes} />
+         <SearchForm onChangeFilterShort={handleChangeFilterShort} movies={movies} onSearch={handleSearchRes} />
 
          {isLoading ? (<Preloader />) : (
             <>
-               {(isSearch && searchMovies.length === 0 &&
+               {(isSearch && filteredMovies.length === 0 &&
                   <NothingFound />
                )}
 
@@ -74,7 +93,7 @@ function Movies({ onDeleteMovie, onAddMovie,  isLoading,  movies, saveMovies }) 
                   isPageSavedMovies={isPageSavedMovies}
                   isLoading={isLoading}
                />
-               {searchMovies.length > moviesToShow && (
+               {filteredMovies.length > moviesToShow && (
                   <ButtonMore handleShowMore={handleShowMore} />
                )}
 

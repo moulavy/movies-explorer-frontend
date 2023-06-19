@@ -3,29 +3,25 @@ import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 
-function SearchForm({ movies, onSearch }) {
+function SearchForm({ movies, onSearch, onChangeFilterShort }) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
-   const [error, setError] = useState('');
-   
+   const [error, setError] = useState('');   
 
    const onChange = (e) => {
       setInputSearch(e.target.value);
    }
 
-   const onSubmit = (e) => {
-      
+   const onSubmit = (e) => {      
       e.preventDefault();
       if (inputSearch.trim() === '') {
          setError('Нужно ввести ключевое слово')
       }
-      else {
-         
+      else {         
          setError('');
          const searchRes = movies.filter((movie) => {
             return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
-         })
-         
+         })         
          onSearch(searchRes);
       };
 
@@ -54,12 +50,12 @@ function SearchForm({ movies, onSearch }) {
                      Найти
                   </button>
                </div>
-               {!isMobileScreen && <FilterCheckBox />}
+               {!isMobileScreen && <FilterCheckBox onChangeFilterShort={onChangeFilterShort} />}
             </form>
             {isMobileScreen && (
                <div className="search__filter-wrapper">
                   <p className="search__error">{error}</p>
-                  <FilterCheckBox />
+                  <FilterCheckBox onChangeFilterShort={onChangeFilterShort} />
 
                </div>
             )}
