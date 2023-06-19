@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import AuthTitle from '../AuthTitle/AuthTitle.js';
 import logo from '../../images/logo.svg';
 
-function Form({onSubmit,visibleButton, link, title, children, textButton, question, linkText, classNameInputs }) {
-   
-  
+function Form({error,onSubmit,visibleButton, link, title, children, textButton, question, linkText, classNameInputs }) {
+
    return (
       <section className="form">
          <div className='form__container'>
@@ -18,6 +17,7 @@ function Form({onSubmit,visibleButton, link, title, children, textButton, questi
                <div className={classNameInputs}>
                   {children}
                </div>
+              {error!=='' && <span className="form__button-error">{error}</span>}
                <button type="submit"  disabled={visibleButton} className={visibleButton ? "form__button form__button_disabled" : "form__button"}>{textButton}</button>
             </form>
 

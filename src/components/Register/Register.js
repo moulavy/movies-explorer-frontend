@@ -3,7 +3,7 @@ import './Register.css';
 import Form from '../Form/Form.js';
 
 
-function Register({ onRegister }) {
+function Register({ onRegister,error}) {
    const [email, setEmail] = React.useState('');
    const [name, setName] = React.useState('');
    const [password, setPassword] = React.useState('');
@@ -52,7 +52,7 @@ function Register({ onRegister }) {
    },[email,name,password])
 
    return (
-      <Form onSubmit={ handleSubmit} visibleButton={visibleButton} link="/signin" classNameInputs="form__inputs_value_register" title="Добро пожаловать!" linkText="Войти" textButton="Зарегистрироваться" question="Уже зарегистрированы?" children={
+      <Form error={error } onSubmit={ handleSubmit} visibleButton={visibleButton} link="/signin" classNameInputs="form__inputs_value_register" title="Добро пожаловать!" linkText="Войти" textButton="Зарегистрироваться" question="Уже зарегистрированы?" children={
          <>
             <div className="form__group">
                <label className="form__label" htmlFor="name">Имя</label>

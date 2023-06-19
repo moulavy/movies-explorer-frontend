@@ -4,8 +4,14 @@ export const BASE_URL_MAIN = 'http://localhost:3003';
 function checkResponse(res) {
    if (res.ok) {
       return res.json();
+   } else {
+      return res.json()
+         .then(data => {
+            const error = new Error(data.message || 'Произошла ошибка');
+            error.response = res;
+            throw error;
+         });
    }
-   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
 export const register = (email, name, password)=>{

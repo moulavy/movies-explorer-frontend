@@ -15,13 +15,11 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    const [isLoading, setIsLoading] = useState(false);
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
    
-   function handleSearchRes(searchRes) {
-      
+   function handleSearchRes(searchRes) {      
       setSearchMovies(searchRes);
       setIsSearch(true);
    }
-   const filterMovies = (movies) => {
-      
+   const filterMovies = (movies) => {      
       if (isShortFilmChecked) {
          return movies.filter((movie) => movie.duration <= 40);
       } else {

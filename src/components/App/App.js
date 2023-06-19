@@ -16,12 +16,13 @@ import PageNotFound from '../PageNotFound/PageNotFound.js'
 function App() {
    const navigate = useNavigate();
    const [movies, setMovies] = useState([]);
-   const [saveMovies, setSaveMovies] = useState([]);   
-   const [isLoading, setIsLoading] = useState(false);   
+   const [saveMovies, setSaveMovies] = useState([]);
+   const [isLoading, setIsLoading] = useState(false);
    const [email, setEmail] = useState('');
    const [name, setName] = useState('');
    const [currentUser, setCurrentUser] = useState({ data: { name: "Имя", email: "Email" } });
    const [loggedIn, setLoggedIn] = useState(false);
+   const [error, setError] = useState('');
 
    useEffect(() => {
       tokenCheckCallback();
@@ -33,10 +34,11 @@ function App() {
                saveToLocal(resMovies.reverse());
                setSaveMovies(resSaveMovies);
                getFromLocal();
-               setIsLoading(false);
             })
             .catch((err) => {
                console.log(err);
+            })
+            .finally(() => {
                setIsLoading(false);
             })
       }
@@ -52,16 +54,22 @@ function App() {
 
 
    const registerCallback = (email, name, password) => {
+      setIsLoading(true);
       mainApi.register(email, name, password)
          .then(() => {
             navigate("/signin", { replace: true });
          })
          .catch((err) => {
-            console.log(err);
+            setError(err.message);
+            console.log(err);            
+         })
+         .finally(() => {
+            setIsLoading(false);
          })
    }
 
    const loginCallback = (email, password) => {
+      setIsLoading(true);
       mainApi.authorize(email, password)
          .then((data) => {
             if (data.message === "Успешно вошли!") {
@@ -73,9 +81,13 @@ function App() {
          .catch((err) => {
             console.log(err);
          })
+         .finally(() => {
+            setIsLoading(false);
+         })
    }
 
    const tokenCheckCallback = () => {
+      setIsLoading(true);
       const isAuth = localStorage.getItem('isAuth');
       if (isAuth) {
          mainApi.checkToken()
@@ -88,10 +100,14 @@ function App() {
             .catch((err) => {
                console.log(err);
             })
+            .finally(() => {
+               setIsLoading(false);
+            })
       }
    }
 
    const handleUpdateUser = (data) => {
+      setIsLoading(true);
       mainApi.updateUserInfo(data)
          .then((res) => {
             setCurrentUser(res);
@@ -99,18 +115,29 @@ function App() {
          .catch((err) => {
             console.log(err);
          })
+         .finally(() => {
+            setIsLoading(false);
+         })
    }
    const logoutCallback = () => {
+      setIsLoading(true);
       mainApi.logout()
          .then(() => {
             setLoggedIn(false);
             localStorage.removeItem('isAuth');
             navigate("/signin", { replace: true });
          })
+         .catch((err) => {
+            console.log(err);
+         })
+         .finally(() => {
+            setIsLoading(false);
+         })
 
    }
 
    const handleAddMovie = (data) => {
+      setIsLoading(true);
       mainApi.addMovies(data)
          .then((newMovie) => {
             setSaveMovies([newMovie.data, ...saveMovies]);
@@ -118,16 +145,24 @@ function App() {
          .catch((err) => {
             console.log(err);
          })
+         .finally(() => {
+            setIsLoading(false);
+         })
    }
 
    const handleDeleteMovie = (movie) => {
-   
+      setIsLoading(true);
       mainApi.deleteMovie(movie._id)
-         .then(()=> {
+         .then(() => {
             const newMovies = saveMovies.filter((item) => movie._id !== item._id);
             setSaveMovies(newMovies);
-            
-      })
+         })
+         .catch((err) => {
+            console.log(err);
+         })
+         .finally(() => {
+            setIsLoading(false);
+         })
    }
 
 
@@ -137,7 +172,9 @@ function App() {
             <Routes>
                <Route path='/' element={<Main isLoggedIn={loggedIn} />} />
                <Route path='/signin' element={<Login onLogin={loginCallback} />} />
-               <Route path='/signup' element={<Register onRegister={registerCallback} />} />
+               <Route path='/signup' element={<Register
+                  onRegister={registerCallback}
+                  error={ error} />} />
                <Route path='/profile' element={<ProtectedRoute
                   loggedIn={loggedIn}
                   element={Profile}
@@ -151,10 +188,10 @@ function App() {
                      element={Movies}
                      onDeleteMovie={handleDeleteMovie}
                      saveMovies={saveMovies}
-                     onAddMovie={handleAddMovie}                   
-                     isLoading={isLoading}                     
+                     onAddMovie={handleAddMovie}
+                     isLoading={isLoading}
                      movies={movies}
-                     />} />
+                  />} />
                <Route path='/saved-movies'
                   element={<ProtectedRoute
                      loggedIn={loggedIn}

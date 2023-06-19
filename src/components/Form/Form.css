@@ -83,6 +83,15 @@
 .form__button_disabled:hover{
  opacity: 1;
 }
+.form__button-error{
+   margin: 0px auto 15px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  height:12px;
+  color: #ee3465;
+  padding: 0;
+}
 .form__question {
   display: flex;
   justify-content: center;
