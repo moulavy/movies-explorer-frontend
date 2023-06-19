@@ -13,22 +13,34 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    const [searchMovies, setSearchMovies] = useState([]);
    const [isSearch, setIsSearch] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
+   const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
    function handleSearchRes(searchRes) {
       
       setSearchMovies(searchRes);
       setIsSearch(true);
    }
-   
+   const filterMovies = (movies) => {
+      if (isShortFilmChecked) {
+         return movies.filter((movie) => movie.duration <= 40);
+      } else {
+         return movies;
+      }
+   };
+
+   const filteredMovies = filterMovies(isSearch ? searchMovies : saveMovies);
+   function handleChangeFilterShort(value) {
+      setIsShortFilmChecked(value);
+   }
    return (
       <>
          <Header linkActive="saved-movies" isLoggedIn={loggedIn} />
-         <SearchForm movies={saveMovies} onSearch={handleSearchRes} />
+         <SearchForm onChangeFilterShort={handleChangeFilterShort} movies={saveMovies} onSearch={handleSearchRes} />
          {isLoading ? (<Preloader />) : (
             <>
-               {(isSearch && searchMovies.length === 0 &&
+               {(isSearch && filteredMovies.length === 0 &&
                   <NothingFound />
                )}
-               <MoviesCardList onDeleteMovie={onDeleteMovie} movies={isSearch ? searchMovies : saveMovies} saveMovies={saveMovies} isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCardList onDeleteMovie={onDeleteMovie} movies={filteredMovies} saveMovies={saveMovies} isPageSavedMovies={isPageSavedMovies} />
             </>
          )}
          <Footer />
