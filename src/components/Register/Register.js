@@ -24,6 +24,18 @@ function Register({ onRegister }) {
       setName(e.target.value);
       setNameError(e.target.validationMessage);
    }
+   function handleChangeName(e) {
+      const value = e.target.value;
+      setName(value);
+      const namePattern = /^[а-яА-ЯёЁa-zA-Z\s-]+$/;
+      const isValid = value.trim() === '' || namePattern.test(value);
+
+      if (isValid || value.trim() === '') {
+         setNameError(e.target.validationMessage);
+      } else {
+         setNameError('Имя должно содержать только латиницу, кириллицу, пробелы и дефисы');
+      }
+   }
    
    const handleSubmit = (e) => {
       e.preventDefault();
