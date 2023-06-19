@@ -16,7 +16,7 @@ function MoviesCard({ onDeleteMovie, onAddMovie, movie, isPageSavedMovies, saveM
    }
 
    const deleteMovie = () => {     
-      onDeleteMovie(movie);
+      onDeleteMovie(movie);     
    }
 
 

@@ -121,11 +121,12 @@ function App() {
    }
 
    const handleDeleteMovie = (movie) => {
-     console.log()
+   
       mainApi.deleteMovie(movie._id)
          .then(()=> {
             const newMovies = saveMovies.filter((item) => movie._id !== item._id);
             setSaveMovies(newMovies);
+            
       })
    }
 

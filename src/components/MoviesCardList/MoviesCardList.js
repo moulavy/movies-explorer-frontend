@@ -15,6 +15,7 @@ function MoviesCardList({onDeleteMovie, saveMovies,onAddMovie, movies, isPageSav
                   movie={movie}
                   key={isPageSavedMovies ? movie._id : movie.id}                  
                   saveMovies={saveMovies}
+                  
                />
             ))}
             </div>         

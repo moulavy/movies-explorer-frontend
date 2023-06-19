@@ -1,5 +1,5 @@
 //компонент страницы с сохранёнными карточками фильмов
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './SavedMovies.css';
 import Header from '../Header/Header.js';
 import SearchForm from '../SearchForm/SearchForm.js';
@@ -14,17 +14,29 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    const [isSearch, setIsSearch] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
+   
    function handleSearchRes(searchRes) {
       
       setSearchMovies(searchRes);
       setIsSearch(true);
    }
    const filterMovies = (movies) => {
+      
       if (isShortFilmChecked) {
          return movies.filter((movie) => movie.duration <= 40);
       } else {
          return movies;
       }
+   };
+   const onDeleteMovieComponent = (movie) => {
+      onDeleteMovie(movie);
+      handleDeleteMovieSearch(movie);
+
+   }
+   const handleDeleteMovieSearch = (movie) => {
+            // Удаление фильма из массива searchMovies
+      const newSearchMovies = searchMovies.filter((item) => item._id !== movie._id);
+      setSearchMovies(newSearchMovies);
    };
 
    const filteredMovies = filterMovies(isSearch ? searchMovies : saveMovies);
@@ -40,7 +52,7 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
                {(isSearch && filteredMovies.length === 0 &&
                   <NothingFound />
                )}
-               <MoviesCardList onDeleteMovie={onDeleteMovie} movies={filteredMovies} saveMovies={saveMovies} isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCardList onDeleteMovie={onDeleteMovieComponent} movies={filteredMovies} saveMovies={saveMovies} isPageSavedMovies={isPageSavedMovies} />
             </>
          )}
          <Footer />
