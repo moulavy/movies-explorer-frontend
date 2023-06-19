@@ -23,7 +23,8 @@ function App() {
    const [currentUser, setCurrentUser] = useState({ data: { name: "Имя", email: "Email" } });
    const [loggedIn, setLoggedIn] = useState(false);
    const [error, setError] = useState('');
-
+   const [searchMovies, setSearchMovies] = useState([]);
+   const [isSearch, setIsSearch] = useState(false);
    useEffect(() => {
       setError('');
       tokenCheckCallback();
@@ -51,14 +52,24 @@ function App() {
       localStorage.setItem('movies', JSON.stringify(moviesList));
    }
 
-   // const getFromLocal = () => {
-   //    setMovies(JSON.parse(localStorage.getItem('movies')));
-   // }
-   const handleGetMovies = () => {
+    const getFromLocal = () => {
+      setMovies(JSON.parse(localStorage.getItem('movies')));
+    }
+   function handleSearchRes(searchRes) {
+      setSearchMovies(searchRes);
+      setIsSearch(true);
+   }
+
+   const handleGetMovies = (inputSearch) => {
       movieApi.getMovies()
          .then((resMovies) => {
             saveToLocal(resMovies.reverse());
-            // getFromLocal();
+            setMovies(resMovies.reverse());
+            const searchRes = resMovies.filter((movie) => {
+               return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
+            }) 
+            handleSearchRes(searchRes);
+             getFromLocal();
          })
          .catch((err) => {
             console.log(err);
@@ -211,6 +222,8 @@ function App() {
                      isLoading={isLoading}
                      movies={movies}
                      setMovies={setMovies}
+                     isSearch={isSearch}
+                     searchMovies={searchMovies}
                   />} />
                <Route path='/saved-movies'
                   element={<ProtectedRoute

@@ -7,29 +7,22 @@ function SearchForm({ onGetMovies,movies,setMovies, onSearch, onChangeFilterShor
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
    const [error, setError] = useState('');   
-
+   const [isSearch, setIsSearch] = useState(false);
    const onChange = (e) => {
       setInputSearch(e.target.value);
    }
 
    const onSubmit = (e) => {      
+      setIsSearch(true);
       e.preventDefault();
       if (inputSearch.trim() === '') {
          setError('Нужно ввести ключевое слово');
       }
       else {         
-         setError('');
-         if (!isPageSavedMovie) {
-            const isMoviesEmpty = localStorage.getItem('movies') === null || JSON.parse(localStorage.getItem('movies')).length === 0;
-            if (isMoviesEmpty) {
-               onGetMovies();
-            }
-            setMovies(JSON.parse(localStorage.getItem('movies')));
-         }
-         const searchRes = movies.filter((movie) => {
-            return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
-         })         
-         onSearch(searchRes);
+         setError('');         
+          onGetMovies(inputSearch);          
+         
+      
       };
 
    }
@@ -45,6 +38,13 @@ function SearchForm({ onGetMovies,movies,setMovies, onSearch, onChangeFilterShor
          window.removeEventListener('resize', checkResolution);
       };
    }, []);
+
+   useEffect(() => {
+      if (!isPageSavedMovie && isSearch) {
+         onGetMovies();
+         setMovies(JSON.parse(localStorage.getItem('movies')));
+      }
+   }, [onGetMovies, isSearch]);
 
    return (
       <section className="search">
