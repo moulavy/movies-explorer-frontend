@@ -3,27 +3,33 @@ import './Register.css';
 import Form from '../Form/Form.js';
 
 
-function Register({ onRegister,error}) {
+function Register({ setError,onRegister,error}) {
    const [email, setEmail] = React.useState('');
    const [name, setName] = React.useState('');
    const [password, setPassword] = React.useState('');
    const [emailError, setEmailError] = React.useState('');
    const [nameError, setNameError] = React.useState('');
    const [passwordError, setPasswordError] = React.useState('');
-   const [visibleButton, setVisibleButton] = React.useState(true);  
+   const [visibleButton, setVisibleButton] = React.useState(true); 
 
    function handleChangeEmail(e) {
-      setEmail(e.target.value);
-      setEmailError(e.target.validationMessage);
+      const value = e.target.value;
+      setEmail(value);
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValid = value.trim() === '' || emailPattern.test(value);
+
+      if (isValid || value.trim() === '') {
+         setEmailError(e.target.validationMessage);
+      } else {
+         setEmailError('Неправильный формат email.');
+      }
    }
+
    function handleChangePassword(e) {
       setPassword(e.target.value);
       setPasswordError(e.target.validationMessage);
    }
-   function handleChangeName(e) {
-      setName(e.target.value);
-      setNameError(e.target.validationMessage);
-   }
+  
    function handleChangeName(e) {
       const value = e.target.value;
       setName(value);
@@ -46,8 +52,10 @@ function Register({ onRegister,error}) {
    }
    useEffect(() => {
       if (email && password && name && nameError === '' && emailError === '' && passwordError === '') {
-         setVisibleButton(false);
-         
+         setVisibleButton(false);         
+      }
+      else {
+         setVisibleButton(true);
       }
    },[email,name,password])
 

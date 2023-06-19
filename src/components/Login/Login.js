@@ -1,16 +1,24 @@
 import React,{useEffect} from 'react';
 import './Login.css';
 import Form from '../Form/Form.js';
-function Login({ onLogin }) {
+function Login({ setError, onLogin,error }) {
    const [email, setEmail] = React.useState('');
    const [password, setPassword] = React.useState('');
    const [emailError, setEmailError] = React.useState('');
    const [passwordError, setPasswordError] = React.useState('');
    const [visibleButton, setVisibleButton] = React.useState(true); 
-
+   
    function handleChangeEmail(e) {   
-      setEmail(e.target.value);
-      setEmailError(e.target.validationMessage);
+      const value = e.target.value;
+      setEmail(value);
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValid = value.trim() === '' || emailPattern.test(value);
+
+      if (isValid || value.trim() === '') {
+         setEmailError(e.target.validationMessage);
+      } else {
+         setEmailError('Неправильный формат email.');
+      }
    }
    function handleChangePassword(e) {     
       setPassword(e.target.value);
@@ -27,11 +35,13 @@ function Login({ onLogin }) {
    useEffect(() => {
       if (email && password  && emailError === '' && passwordError === '') {
          setVisibleButton(false);
-
+      }
+      else {
+         setVisibleButton(true);
       }
    }, [email, password])
    return (
-      <Form onSubmit={handleSubmit} visibleButton={visibleButton} link="/signup" classNameInputs="form__inputs_value_login" title="Рады видеть!" linkText="Регистрация" textButton="Войти" question="Еще не зарегистрированы?" children={
+      <Form error={error} onSubmit={handleSubmit} visibleButton={visibleButton} link="/signup" classNameInputs="form__inputs_value_login" title="Рады видеть!" linkText="Регистрация" textButton="Войти" question="Еще не зарегистрированы?" children={
          <>
             <div className="form__group">
                <label className="form__label" htmlFor="email">E-mail</label>

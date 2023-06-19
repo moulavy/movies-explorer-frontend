@@ -25,6 +25,7 @@ function App() {
    const [error, setError] = useState('');
 
    useEffect(() => {
+      setError('');
       tokenCheckCallback();
       setIsLoading(true);
       if (loggedIn) {
@@ -79,6 +80,7 @@ function App() {
             }
          })
          .catch((err) => {
+            setError(err.message);
             console.log(err);
          })
          .finally(() => {
@@ -171,8 +173,11 @@ function App() {
          <CurrentUserContext.Provider value={currentUser}>
             <Routes>
                <Route path='/' element={<Main isLoggedIn={loggedIn} />} />
-               <Route path='/signin' element={<Login onLogin={loginCallback} />} />
+               <Route path='/signin' element={<Login error={error}
+                  setError={setError}
+                  onLogin={loginCallback} />} />
                <Route path='/signup' element={<Register
+                  setError={setError}
                   onRegister={registerCallback}
                   error={ error} />} />
                <Route path='/profile' element={<ProtectedRoute
