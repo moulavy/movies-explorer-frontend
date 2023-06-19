@@ -1,13 +1,17 @@
 import React,{useEffect} from 'react';
 import './Login.css';
 import Form from '../Form/Form.js';
-function Login({ setError, onLogin,error }) {
+function Login({ setError,onLogin,error }) {
    const [email, setEmail] = React.useState('');
    const [password, setPassword] = React.useState('');
    const [emailError, setEmailError] = React.useState('');
    const [passwordError, setPasswordError] = React.useState('');
    const [visibleButton, setVisibleButton] = React.useState(true); 
-   
+   useEffect(() => {
+      return () => {
+         setError(''); // сброс ошибки при размонтировании компонента
+      };
+   }, []);
    function handleChangeEmail(e) {   
       const value = e.target.value;
       setEmail(value);

@@ -11,7 +11,11 @@ function Register({ setError,onRegister,error}) {
    const [nameError, setNameError] = React.useState('');
    const [passwordError, setPasswordError] = React.useState('');
    const [visibleButton, setVisibleButton] = React.useState(true); 
-
+   useEffect(() => {
+      return () => {
+         setError(''); // сброс ошибки при размонтировании компонента
+      };
+   }, []);
    function handleChangeEmail(e) {
       const value = e.target.value;
       setEmail(value);
