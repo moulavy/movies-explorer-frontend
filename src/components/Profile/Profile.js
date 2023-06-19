@@ -13,6 +13,9 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
    const [isDisabledInput, setIsDisabledInput] = useState(true);
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
+   const [emailError, setEmailError] = React.useState('');
+   const [nameError, setNameError] = React.useState('');
+   const [visibleButton, setVisibleButton] = React.useState(true);
    useEffect(() => {
       return () => {
          setError(''); // сброс ошибки при размонтировании компонента
@@ -29,12 +32,39 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
       setIsEdit(true);
       setIsDisabledInput(false);
    }
-   function handleInputChangeName(event) {
-      setName(event.target.value);
+   function handleChangeEmail(e) {
+      const value = e.target.value;
+      setEmail(value);
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValid = value.trim() === '' || emailPattern.test(value);
+
+      if (isValid || value.trim() === '') {
+         setEmailError(e.target.validationMessage);
+      } else {
+         setEmailError('Неправильный формат email.');
+      }
    }
-   function handleInputChangeEmail(event) {
-      setEmail(event.target.value);
+   function handleChangeName(e) {
+      const value = e.target.value;
+      setName(value);
+      const namePattern = /^[а-яА-ЯёЁa-zA-Z\s-]+$/;
+      const isValid = value.trim() === '' || namePattern.test(value);
+
+      if (isValid || value.trim() === '') {
+         setNameError(e.target.validationMessage);
+      } else {
+         setNameError('Имя должно содержать только латиницу, кириллицу, пробелы и дефисы');
+      }
    }
+   useEffect(() => {
+      if (email  && name && nameError === '' && emailError === '' ) {
+         setVisibleButton(false);
+      }
+      else {
+         setVisibleButton(true);
+      }
+   }, [email, name])
+  
    function handleSubmit(e) {
       e.preventDefault();
       onUpdateUser({
@@ -62,9 +92,11 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
                         maxLength="35"
                         required
                         value={name || ''}
-                        onChange={handleInputChangeName}
+                        onChange={handleChangeName}
                      />
+                     
                   </div>
+                  <p className="profile__error">{nameError}</p>
                   <div className="profile__group profile__email">
                      <label className="profile__label" htmlFor="email">E-mail</label>
                      <input disabled={isDisabledInput}
@@ -75,9 +107,11 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
                         name="email"
                         required
                         value={email || ''}
-                        onChange={handleInputChangeEmail}
+                        onChange={handleChangeEmail}
                      />
+                     
                   </div>
+                  <p className="profile__error">{emailError}</p>
                   {isEdit ?
                      <>{ <p className="profile__button-error">{error}</p>}
                         <button type="submit" disabled={isDisabledButton} className={isDisabledButton ? "profile__button-save profile__button-save_disabled" : "profile__button-save"}>Сохранить</button></>
