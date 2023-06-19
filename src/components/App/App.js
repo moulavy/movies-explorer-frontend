@@ -141,7 +141,7 @@ function App() {
    }
 
    const handleAddMovie = (data) => {
-      setIsLoading(true);
+     
       mainApi.addMovies(data)
          .then((newMovie) => {
             setSaveMovies([newMovie.data, ...saveMovies]);
@@ -149,13 +149,11 @@ function App() {
          .catch((err) => {
             console.log(err);
          })
-         .finally(() => {
-            setIsLoading(false);
-         })
+        
    }
 
    const handleDeleteMovie = (movie) => {
-      setIsLoading(true);
+      
       mainApi.deleteMovie(movie._id)
          .then(() => {
             const newMovies = saveMovies.filter((item) => movie._id !== item._id);
@@ -164,9 +162,7 @@ function App() {
          .catch((err) => {
             console.log(err);
          })
-         .finally(() => {
-            setIsLoading(false);
-         })
+         
    }
 
 

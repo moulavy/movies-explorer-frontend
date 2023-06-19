@@ -15,7 +15,7 @@ function SearchForm({ movies, onSearch, onChangeFilterShort }) {
    const onSubmit = (e) => {      
       e.preventDefault();
       if (inputSearch.trim() === '') {
-         setError('Нужно ввести ключевое слово')
+         setError('Нужно ввести ключевое слово');
       }
       else {         
          setError('');
