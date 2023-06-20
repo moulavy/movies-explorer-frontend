@@ -7,8 +7,9 @@ import Footer from '../Footer/Footer.js';
 import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
+import ErrorMovies from '../ErrorMovies/ErrorMovies';
 
-function Movies({ 
+function Movies({ error,setError,
    filteredMovies,   
    onChangeFilterShort,
    input,
@@ -26,6 +27,11 @@ function Movies({
    const [moviesToShow, setMoviesToShow] = useState(0);    
    const currentPath = window.location.pathname;
    localStorage.setItem('currentPath', currentPath);
+   useEffect(() => {
+      return () => {
+         setError(''); // сброс ошибки при размонтировании компонента
+      };
+   }, []);
    useEffect(() => {
       function handleResize() {
          setWindowWidth(window.innerWidth);
@@ -85,6 +91,7 @@ function Movies({
                {(isSearch && filteredMovies.length === 0 &&
                   <NothingFound />
                )}
+               {error !== '' && < ErrorMovies error={error} />}
 
                <MoviesCardList
                   saveMovies={saveMovies}                 

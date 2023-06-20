@@ -122,6 +122,7 @@ function App() {
             getFromLocal();
          })
          .catch((err) => {
+            setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
             console.log(err);
          })
          .finally(() => {
@@ -184,7 +185,7 @@ function App() {
                }
             })
             .catch((err) => {
-               console.log(err);
+               console.log(err);             
             })
             .finally(() => {
                setIsLoading(false);
@@ -285,7 +286,9 @@ function App() {
                      name={name}
                      email={email} />} />
                   <Route path='/movies'
-                     element={<ProtectedRoute
+                  element={<ProtectedRoute
+                     error={error}
+                     setError={setError}
                         filteredMovies={filteredMovies}
                         setFilteredMovies={setFilteredMovies}
                         onGetMovies={handleGetMovies}
