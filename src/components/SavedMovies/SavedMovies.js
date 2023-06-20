@@ -14,7 +14,7 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    const [isSearch, setIsSearch] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
-   
+   const [inputSaveSearch, setInputSaveSearch] = useState('');
    function handleSearchRes(searchRes) {      
       setSearchSavedMovies(searchRes);
       setIsSearch(true);
@@ -44,7 +44,7 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    return (
       <>
          <Header linkActive="saved-movies" isLoggedIn={loggedIn} />
-         <SearchForm isPageSavedMovie={isPageSavedMovies} onChangeFilterShort={handleChangeFilterShort} movies={saveMovies} onSearch={handleSearchRes} />
+         <SearchForm inputSearch={inputSaveSearch } setInputSearch={setInputSaveSearch} isPageSavedMovie={isPageSavedMovies} onChangeFilterShort={handleChangeFilterShort} movies={saveMovies} onSearch={handleSearchRes} />
          {isLoading ? (<Preloader />) : (
             <>
                {(isSearch && filteredMovies.length === 0 &&

@@ -3,7 +3,7 @@ import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 
-function SearchForm({ onGetMovies,movies,setMovies, onSearch, onChangeFilterShort,isPageSavedMovie }) {
+function SearchForm({input, onGetMovies,movies,onSearch, onChangeFilterShort,isPageSavedMovie }) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
    const [error, setError] = useState('');   
@@ -44,8 +44,12 @@ function SearchForm({ onGetMovies,movies,setMovies, onSearch, onChangeFilterShor
          window.removeEventListener('resize', checkResolution);
       };
    }, []);
-
-
+   useEffect(() => {
+      setInputSearch(input); 
+   }, [input]);
+   
+   console.log('input:', input);
+   console.log('inputSearch:',inputSearch)
    return (
       <section className="search">
          <div className="search__container">

@@ -8,13 +8,13 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({isSearch,searchMovies,onGetMovies, onDeleteMovie, onAddMovie,  isLoading,  movies,setMovies, saveMovies }) {
+function Movies({input,isSearch,searchMovies,onGetMovies, onDeleteMovie, onAddMovie,  isLoading,  movies,setMovies, saveMovies }) {
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
    const [moviesToShow, setMoviesToShow] = useState(0);
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
-  
+ 
 
    useEffect(() => {
       function handleResize() {
@@ -72,6 +72,8 @@ function Movies({isSearch,searchMovies,onGetMovies, onDeleteMovie, onAddMovie,  
             onChangeFilterShort={handleChangeFilterShort}
             movies={movies}
             setMovies={setMovies}
+            input={input}
+            
              />
 
          {isLoading ? (<Preloader />) : (

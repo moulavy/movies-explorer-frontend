@@ -18,13 +18,14 @@ function App() {
    const [movies, setMovies] = useState([]);
    const [saveMovies, setSaveMovies] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
-   const [email, setEmail] = useState('');
+   const [email, setEmail] = useState('');  
    const [name, setName] = useState('');
    const [currentUser, setCurrentUser] = useState({ data: { name: "Имя", email: "Email" } });
    const [loggedIn, setLoggedIn] = useState(false);
    const [error, setError] = useState('');
    const [searchMovies, setSearchMovies] = useState([]);
    const [isSearch, setIsSearch] = useState(false);
+   const [input, setInput] = useState('');
    useEffect(() => {
       setError('');
       tokenCheckCallback();
@@ -32,9 +33,19 @@ function App() {
       if (loggedIn) {
          Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
             .then(([resUser, resSaveMovies]) => {
-               const isMoviesEmpty = localStorage.getItem('movies') === undefined;
-               if (!isMoviesEmpty) {
+               const isSearchMoviesEmty = localStorage.getItem('searchMovies') === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
+               console.log(isSearchMoviesEmty);
+               if (!isSearchMoviesEmty) {
+                  setInput(JSON.parse(localStorage.getItem('inputSearchValue')))
+                  setSearchMovies(JSON.parse(localStorage.getItem('searchMovies')));
+                  setIsSearch(true);
                   setMovies(JSON.parse(localStorage.getItem('movies')));
+               }
+               else {
+                  const isMoviesEmpty = localStorage.getItem('movies') === undefined;
+                  if (!isMoviesEmpty) {
+                     setMovies(JSON.parse(localStorage.getItem('movies')));
+                  }
                }
                setCurrentUser(resUser);
                setSaveMovies(resSaveMovies);              
@@ -57,12 +68,14 @@ function App() {
     }
    function handleSearchRes(searchRes) {
       setSearchMovies(searchRes);
+      localStorage.setItem('searchMovies', JSON.stringify(searchRes));
       setIsSearch(true);
    }
 
    const handleGetMovies = (inputSearch) => {
       movieApi.getMovies()
          .then((resMovies) => {
+            localStorage.setItem('inputSearchValue', JSON.stringify(inputSearch));
             saveToLocal(resMovies.reverse());
             setMovies(resMovies.reverse());
             const searchRes = resMovies.filter((movie) => {
@@ -153,6 +166,8 @@ function App() {
             setLoggedIn(false);
             localStorage.removeItem('isAuth');
             localStorage.removeItem('movies');
+            localStorage.removeItem('inputSearchValue');
+            localStorage.removeItem('searchMovies');
             navigate("/signin", { replace: true });
          })
          .catch((err) => {
@@ -188,6 +203,9 @@ function App() {
          })
          
    }
+   // const handleSetInputSearch = (value) => {
+   //    setInputSearch(value);
+   // }
 
 
    return (
@@ -224,6 +242,8 @@ function App() {
                      setMovies={setMovies}
                      isSearch={isSearch}
                      searchMovies={searchMovies}
+                     input={input}
+                     
                   />} />
                <Route path='/saved-movies'
                   element={<ProtectedRoute
