@@ -41,8 +41,7 @@ function App() {
                const isCheckedShortButtonEmpty = isCheckShortButton === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
                console.log('isCheckedShortButtonEmpty', isCheckedShortButtonEmpty)
                const isSearchMoviesEmty = localStorage.getItem('searchMovies') === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
-               if (!isCheckedShortButtonEmpty &&  isCheckShortButton === "true" ) {                  
-                     console.log('приходит')
+               if (!isCheckedShortButtonEmpty &&  isCheckShortButton === "true" ) {              
                      setIsShortFilmChecked(true);
                      setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')))
                      setInput(JSON.parse(localStorage.getItem('inputSearchValue')))
@@ -50,8 +49,7 @@ function App() {
                      setIsSearch(true);
                      setMovies(JSON.parse(localStorage.getItem('movies')));                  
                }
-               else if (!isSearchMoviesEmty) {
-                  console.log('приходит search')
+               else if (!isSearchMoviesEmty) {                 
                   setInput(JSON.parse(localStorage.getItem('inputSearchValue')))
                   setSearchMovies(JSON.parse(localStorage.getItem('searchMovies')));
                   setIsSearch(true);
