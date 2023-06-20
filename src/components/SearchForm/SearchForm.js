@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
-import FilterCheckBox from '../FilterCheckBox/FilterCheckBox.js';
+import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
 
 function SearchForm({ input,
    onGetMovies,
