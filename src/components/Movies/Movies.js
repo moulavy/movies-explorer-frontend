@@ -8,15 +8,11 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ isShortFilmChecked,
-   filteredMovies,
-   setFilteredMovies,
-   
-   
+function Movies({ 
+   filteredMovies,   
    onChangeFilterShort,
    input,
    isSearch,
-   searchMovies,
    onGetMovies,
    onDeleteMovie,
    onAddMovie,
@@ -27,10 +23,7 @@ function Movies({ isShortFilmChecked,
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-   const [moviesToShow, setMoviesToShow] = useState(0);   
-   
-
-   
+   const [moviesToShow, setMoviesToShow] = useState(0);    
 
    useEffect(() => {
       function handleResize() {
@@ -65,22 +58,7 @@ function Movies({ isShortFilmChecked,
 
    };
 
-   // const filterMovies = (movies) => {      
-   //    if (isShortFilmChecked) {         
-   //       return movies.filter((movie) => movie.duration <= 40);          
-   //    } else {
-   //       return movies;
-   //    }
-   // };
-
-   // const filteredMovies = filterMovies(searchMovies);
     const visibleMovies = filteredMovies.slice(0, moviesToShow);
-   
-   
-
-   // function handleChangeFilterShort(value) {      
-   //    setIsShortFilmChecked(value);  
-   // }
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
