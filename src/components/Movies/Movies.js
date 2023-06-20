@@ -40,7 +40,11 @@ function Movies({
       const calculateMoviesToShow = () => {
          if (windowWidth >= 1280) {
             setMoviesToShow(16);
-         } else if (windowWidth >= 768) {
+         }
+         else if (windowWidth >= 994) {
+            setMoviesToShow(9);
+         }
+         else if (windowWidth >= 768) {
             setMoviesToShow(8);
          } else {
             setMoviesToShow(5);
@@ -53,7 +57,11 @@ function Movies({
    const handleShowMore = () => {
       if (windowWidth >= 1280) {
          setMoviesToShow(moviesToShow + 4);
-      } else {
+      }
+      else if (windowWidth >= 994) {
+         setMoviesToShow(moviesToShow + 3);
+      }
+      else {
          setMoviesToShow(moviesToShow + 2);
       }
 
