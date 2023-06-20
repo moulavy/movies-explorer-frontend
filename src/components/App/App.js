@@ -26,6 +26,7 @@ function App() {
    const [searchMovies, setSearchMovies] = useState([]);
    const [isSearch, setIsSearch] = useState(false);
    const [input, setInput] = useState('');
+   const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
    useEffect(() => {
       setError('');
       tokenCheckCallback();
@@ -203,10 +204,9 @@ function App() {
          })
          
    }
-   // const handleSetInputSearch = (value) => {
-   //    setInputSearch(value);
-   // }
-
+   function handleChangeFilterShort(value) {
+      setIsShortFilmChecked(value);
+   }
 
    return (
       <div className="page">
@@ -243,7 +243,8 @@ function App() {
                      isSearch={isSearch}
                      searchMovies={searchMovies}
                      input={input}
-                     
+                     isShortFilmChecked={isShortFilmChecked}
+                     onChangeFilterShort={handleChangeFilterShort}
                   />} />
                <Route path='/saved-movies'
                   element={<ProtectedRoute
