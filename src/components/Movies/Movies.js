@@ -9,8 +9,8 @@ import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 import ErrorMovies from '../ErrorMovies/ErrorMovies';
 
-function Movies({ error,setError,
-   filteredMovies,   
+function Movies({ error, setError,
+   filteredMovies,
    onChangeFilterShort,
    input,
    isSearch,
@@ -24,7 +24,7 @@ function Movies({ error,setError,
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-   const [moviesToShow, setMoviesToShow] = useState(0);    
+   const [moviesToShow, setMoviesToShow] = useState(0);
    const currentPath = window.location.pathname;
    localStorage.setItem('currentPath', currentPath);
    useEffect(() => {
@@ -59,7 +59,7 @@ function Movies({ error,setError,
       calculateMoviesToShow();
    }, [windowWidth]);
 
-  
+
    const handleShowMore = () => {
       if (windowWidth >= 1280) {
          setMoviesToShow(moviesToShow + 4);
@@ -73,7 +73,7 @@ function Movies({ error,setError,
 
    };
 
-    const visibleMovies = filteredMovies.slice(0, moviesToShow);
+   const visibleMovies = filteredMovies.slice(0, moviesToShow);
    return (
       <>
          <Header linkActive="movies" isLoggedIn={isLoggedIn} />
@@ -83,8 +83,8 @@ function Movies({ error,setError,
             movies={movies}
             setMovies={setMovies}
             input={input}
-            
-             />
+
+         />
 
          {isLoading ? (<div className="movies__preloader"><Preloader /></div>) : (
             <>
@@ -94,7 +94,7 @@ function Movies({ error,setError,
                {error !== '' && < ErrorMovies error={error} />}
 
                <MoviesCardList
-                  saveMovies={saveMovies}                 
+                  saveMovies={saveMovies}
                   onAddMovie={onAddMovie}
                   onDeleteMovie={onDeleteMovie}
                   movies={visibleMovies}
@@ -107,8 +107,8 @@ function Movies({ error,setError,
 
             </>
          )}
-         
-         
+
+
          <Footer />
       </>
    );

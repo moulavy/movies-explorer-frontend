@@ -1,5 +1,5 @@
 //компонент страницы с сохранёнными карточками фильмов
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import './SavedMovies.css';
 import Header from '../Header/Header.js';
 import SearchForm from '../SearchForm/SearchForm.js';
@@ -8,21 +8,20 @@ import Footer from '../Footer/Footer.js';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
-function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
+function SavedMovies({ loggedIn, saveMovies, onDeleteMovie, isLoading }) {
    const currentPath = window.location.pathname;
    localStorage.setItem('currentPath', currentPath);
    const isPageSavedMovies = true;
    const [searchSavedMovies, setSearchSavedMovies] = useState([]);
    const [isSearchSave, setIsSearchSave] = useState(false);
-   const [isLoading, setIsLoading] = useState(false);
- 
+
    const [isShortSaveFilmChecked, setIsShortSaveFilmChecked] = useState(false);
    const [inputSaveSearch, setInputSaveSearch] = useState('');
-   function handleSearchRes(searchRes) {      
+   function handleSearchRes(searchRes) {
       setSearchSavedMovies(searchRes);
       setIsSearchSave(true);
    }
-   const filterMovies = (movies) => {      
+   const filterMovies = (movies) => {
       if (isShortSaveFilmChecked) {
          return movies.filter((movie) => movie.duration <= 40);
       } else {
@@ -35,7 +34,7 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
 
    }
    const handleDeleteMovieSearch = (movie) => {
-            // Удаление фильма из массива searchMovies
+      // Удаление фильма из массива searchMovies
       const newSearchMovies = searchSavedMovies.filter((item) => item._id !== movie._id);
       setSearchSavedMovies(newSearchMovies);
    };

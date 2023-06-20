@@ -30,9 +30,9 @@ function App() {
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
    const [filteredMovies, setFilteredMovies] = useState([]);
    useEffect(() => {
-      const currentPath = localStorage.getItem('currentPath'); 
+      const currentPath = localStorage.getItem('currentPath');
       if (currentPath) {
-         navigate(currentPath, { replace: true }); 
+         navigate(currentPath, { replace: true });
       }
    }, []);
    useEffect(() => {
@@ -128,7 +128,7 @@ function App() {
          .finally(() => {
             setIsLoading(false);
          })
-      
+
    }
 
 
@@ -185,7 +185,7 @@ function App() {
                }
             })
             .catch((err) => {
-               console.log(err);             
+               console.log(err);
             })
             .finally(() => {
                setIsLoading(false);
@@ -264,58 +264,58 @@ function App() {
    }
 
    return (
-      <div className="page">        
-            <CurrentUserContext.Provider value={currentUser}>
-               <Routes>
-                  <Route path='/' element={<Main isLoggedIn={loggedIn} />} />
-                  <Route path='/signin' element={<Login error={error}
-                     setError={setError}
-                     onLogin={loginCallback} />} />
-                  <Route path='/signup' element={<Register
-                     setError={setError}
-                     onRegister={registerCallback}
-                     error={error} />} />
+      <div className="page">
+         <CurrentUserContext.Provider value={currentUser}>
+            <Routes>
+               <Route path='/' element={<Main isLoggedIn={loggedIn} />} />
+               <Route path='/signin' element={<Login error={error}
+                  setError={setError}
+                  onLogin={loginCallback} />} />
+               <Route path='/signup' element={<Register
+                  setError={setError}
+                  onRegister={registerCallback}
+                  error={error} />} />
                <Route path='/profile' element={<ProtectedRoute
                   isLoading={isLoading}
-                     error={error}
-                     setError={setError}
-                     loggedIn={loggedIn}
-                     element={Profile}
-                     onUpdateUser={handleUpdateUser}
-                     onLogout={logoutCallback}
-                     name={name}
-                     email={email} />} />
-                  <Route path='/movies'
+                  error={error}
+                  setError={setError}
+                  loggedIn={loggedIn}
+                  element={Profile}
+                  onUpdateUser={handleUpdateUser}
+                  onLogout={logoutCallback}
+                  name={name}
+                  email={email} />} />
+               <Route path='/movies'
                   element={<ProtectedRoute
                      error={error}
                      setError={setError}
-                        filteredMovies={filteredMovies}
-                        setFilteredMovies={setFilteredMovies}
-                        onGetMovies={handleGetMovies}
-                        loggedIn={loggedIn}
-                        element={Movies}
-                        onDeleteMovie={handleDeleteMovie}
-                        saveMovies={saveMovies}
-                        onAddMovie={handleAddMovie}
-                        isLoading={isLoading}
-                        movies={movies}
-                        setMovies={setMovies}
-                        isSearch={isSearch}
-                        searchMovies={searchMovies}
-                        input={input}
-                        isShortFilmChecked={isShortFilmChecked}
-                        onChangeFilterShort={handleChangeFilterShort}
-                     />} />
-                  <Route path='/saved-movies'
-                     element={<ProtectedRoute
-                        loggedIn={loggedIn}
-                        element={SavedMovies}
-                        saveMovies={saveMovies}
-                        onDeleteMovie={handleDeleteMovie}
-                     />} />
-                  <Route path="*" element={<PageNotFound />} />
-               </Routes>
-            </CurrentUserContext.Provider>         
+                     filteredMovies={filteredMovies}
+                     setFilteredMovies={setFilteredMovies}
+                     onGetMovies={handleGetMovies}
+                     loggedIn={loggedIn}
+                     element={Movies}
+                     onDeleteMovie={handleDeleteMovie}
+                     saveMovies={saveMovies}
+                     onAddMovie={handleAddMovie}
+                     isLoading={isLoading}
+                     movies={movies}
+                     setMovies={setMovies}
+                     isSearch={isSearch}
+                     searchMovies={searchMovies}
+                     input={input}
+                     isShortFilmChecked={isShortFilmChecked}
+                     onChangeFilterShort={handleChangeFilterShort}
+                  />} />
+               <Route path='/saved-movies'
+                  element={<ProtectedRoute
+                     loggedIn={loggedIn}
+                     element={SavedMovies}
+                     saveMovies={saveMovies}
+                     onDeleteMovie={handleDeleteMovie}
+                  />} />
+               <Route path="*" element={<PageNotFound />} />
+            </Routes>
+         </CurrentUserContext.Provider>
       </div>
 
    );

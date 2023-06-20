@@ -7,12 +7,12 @@ function checkResponse(res) {
    return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-export const getMovies=()=> {
+export const getMovies = () => {
    return fetch(`${BASE_URL_MOVIE}/`, {
       method: 'GET',
       headers: {
          'Content-Type': 'application/json',
       }
    })
-   .then(checkResponse)
+      .then(checkResponse)
 }

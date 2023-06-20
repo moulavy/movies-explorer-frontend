@@ -23,7 +23,7 @@ function Header({ linkActive, isLoggedIn }) {
    }, [menu]);
 
    return (
-      <header className={(linkActive!=='home' ? 'header header-movies' : 'header header-main')}>
+      <header className={(linkActive !== 'home' ? 'header header-movies' : 'header header-main')}>
          <div className={(isLoggedIn ? 'header__container header__container-movies' : 'header__container header__container-main')}>
             <Link to="/" className="header__logo">
                <img src={logoImg} alt="лого" className="header__logo-img" />

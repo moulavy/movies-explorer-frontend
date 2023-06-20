@@ -11,24 +11,24 @@ function SearchForm({ input,
    isPageSavedMovies }) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
-   const [error, setError] = useState('');   
+   const [error, setError] = useState('');
    const [isSearch, setIsSearch] = useState(false);
 
    const onChange = (e) => {
       setInputSearch(e.target.value);
    }
 
-   const onSubmit = (e) => {      
+   const onSubmit = (e) => {
       setIsSearch(true);
       e.preventDefault();
       if (inputSearch.trim() === '') {
          setError('Нужно ввести ключевое слово');
       }
-      else {         
-         setError('');         
+      else {
+         setError('');
          if (!isPageSavedMovies) {
             onGetMovies(inputSearch);
-         }  
+         }
          else {
             const searchRes = movies.filter((movie) => {
                return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
@@ -38,7 +38,7 @@ function SearchForm({ input,
       };
 
    }
-   
+
 
    useEffect(() => {
       function checkResolution() {
@@ -57,7 +57,7 @@ function SearchForm({ input,
          setInputSearch(input);
       }
    }, [input]);
-   
+
    return (
       <section className="search">
          <div className="search__container">

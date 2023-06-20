@@ -1,18 +1,18 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './Login.css';
 import Form from '../Form/Form.js';
-function Login({ setError,onLogin,error }) {
+function Login({ setError, onLogin, error }) {
    const [email, setEmail] = React.useState('');
    const [password, setPassword] = React.useState('');
    const [emailError, setEmailError] = React.useState('');
    const [passwordError, setPasswordError] = React.useState('');
-   const [visibleButton, setVisibleButton] = React.useState(true); 
+   const [visibleButton, setVisibleButton] = React.useState(true);
    useEffect(() => {
       return () => {
          setError(''); // сброс ошибки при размонтировании компонента
       };
    }, []);
-   function handleChangeEmail(e) {   
+   function handleChangeEmail(e) {
       const value = e.target.value;
       setEmail(value);
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,20 +24,20 @@ function Login({ setError,onLogin,error }) {
          setEmailError('Неправильный формат email.');
       }
    }
-   function handleChangePassword(e) {     
+   function handleChangePassword(e) {
       setPassword(e.target.value);
       setPasswordError(e.target.validationMessage);
    }
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      if (!email || !password ) {
+      if (!email || !password) {
          return;
-      }    
+      }
       onLogin(email, password);
    }
    useEffect(() => {
-      if (email && password  && emailError === '' && passwordError === '') {
+      if (email && password && emailError === '' && passwordError === '') {
          setVisibleButton(false);
       }
       else {
@@ -49,7 +49,7 @@ function Login({ setError,onLogin,error }) {
          <>
             <div className="form__group">
                <label className="form__label" htmlFor="email">E-mail</label>
-               <input value={email}  onChange={handleChangeEmail} autoComplete="off" type="email" id="email" className="form__input form__email" name="email" required />
+               <input value={email} onChange={handleChangeEmail} autoComplete="off" type="email" id="email" className="form__input form__email" name="email" required />
                <p className="form__error">{emailError}</p>
             </div>
             <div className="form__group">

@@ -1,5 +1,5 @@
-//export const BASE_URL = 'https://api.movies.moulavy.nomoredomains.rocks/';
-export const BASE_URL_MAIN = 'http://localhost:3003';
+export const BASE_URL_MAIN = 'https://api.movies.moulavy.nomoredomains.rocks/';
+// export const BASE_URL_MAIN = 'http://localhost:3003';
 
 function checkResponse(res) {
    if (res.ok) {
@@ -14,16 +14,16 @@ function checkResponse(res) {
    }
 }
 
-export const register = (email, name, password)=>{
+export const register = (email, name, password) => {
    return fetch(`${BASE_URL_MAIN}/signup`, {
       method: 'POST',
       headers: {
          'Accept': 'application/json',
          'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email,name, password })
+      body: JSON.stringify({ email, name, password })
    })
-   .then(checkResponse)
+      .then(checkResponse)
 }
 
 export const authorize = (email, password) => {
@@ -36,7 +36,7 @@ export const authorize = (email, password) => {
       body: JSON.stringify({ email, password }),
       credentials: 'include'
    })
-   .then(checkResponse)
+      .then(checkResponse)
 }
 
 export const checkToken = () => {
@@ -60,10 +60,10 @@ export const getUserInfo = () => {
          'Content-Type': 'application/json'
       }
    })
-   .then(checkResponse)
+      .then(checkResponse)
 }
 
-export const updateUserInfo = (data) => {   
+export const updateUserInfo = (data) => {
    return fetch(`${BASE_URL_MAIN}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -79,18 +79,18 @@ export const updateUserInfo = (data) => {
       .then(checkResponse);
 }
 
-export const logout = () => {   
-   return fetch(`${BASE_URL_MAIN}/signout`, {      
+export const logout = () => {
+   return fetch(`${BASE_URL_MAIN}/signout`, {
       headers: {
          'Accept': 'application/json',
          'Content-Type': 'application/json'
       },
-      credentials: 'include',      
+      credentials: 'include',
    })
       .then(checkResponse);
 }
 
-export const addMovies=(data)=> {
+export const addMovies = (data) => {
    return fetch(`${BASE_URL_MAIN}/movies`, {
       method: 'POST',
       headers: {
@@ -99,7 +99,7 @@ export const addMovies=(data)=> {
       },
       credentials: 'include',
       body: JSON.stringify({
-         country:data.country,
+         country: data.country,
          director: data.director,
          duration: data.duration,
          year: data.year,
@@ -127,7 +127,7 @@ export const getMovies = () => {
       .then(checkResponse);
 }
 
-export const deleteMovie = (id) => {   
+export const deleteMovie = (id) => {
    return fetch(`${BASE_URL_MAIN}/movies/${id}`, {
       method: 'DELETE',
       headers: {
