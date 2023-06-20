@@ -2,27 +2,33 @@
 import React,{useState,useEffect} from 'react';
 import './FilterCheckBox.css';
 
-function FilterCheckBox({onChangeFilterShort}) {
+function FilterCheckBox({onChangeFilterShort,isPageSavedMovies}) {
    const [isCheckedShort, setIsCheckedShort] = useState(false);
-   
+   const [isCheckedSaveShort, setIsCheckedSaveShort] = useState(false);
    useEffect(() => {
-      const savedValue = localStorage.getItem('isCheckedShort');
-      if (savedValue !== null) {
-         setIsCheckedShort(JSON.parse(savedValue));
-         
+      if (!isPageSavedMovies) {
+         const savedValue = localStorage.getItem('isCheckedShort');
+         if (savedValue !== null) {
+            setIsCheckedShort(JSON.parse(savedValue));         
+         }
       }
-      
    }, []);
 
    const onChange = () => {
-      const newValue = !isCheckedShort;
-      setIsCheckedShort(newValue);
-      localStorage.setItem('isCheckedShort', JSON.stringify(newValue));
-      onChangeFilterShort(newValue);
+      if (!isPageSavedMovies) {
+         const newValue = !isCheckedShort;
+         setIsCheckedShort(newValue);
+         localStorage.setItem('isCheckedShort', JSON.stringify(newValue));
+         onChangeFilterShort(newValue);
+      }
+      else {
+         setIsCheckedSaveShort(!isCheckedSaveShort);
+         onChangeFilterShort(!isCheckedSaveShort)
+      }
    };
    return (
       <label htmlFor="filter" className="checkbox">
-         <input type="checkbox" id="filter" checked={isCheckedShort} onChange={onChange} className="checkbox__input" />
+         <input type="checkbox" id="filter" checked={isPageSavedMovies ? isCheckedSaveShort : isCheckedShort} onChange={onChange} className="checkbox__input" />
          <div className="checkbox__container">
             <div className="checkbox__slider"></div>
             <span className="checkbox__text">Короткометражки</span>

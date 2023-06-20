@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
-import { useNavigate } from 'react-router-dom';
 
-function SearchForm({input, onGetMovies,movies,onSearch, onChangeFilterShort,isPageSavedMovie }) {
+function SearchForm({ input,
+   onGetMovies,
+   movies,
+   onSearch,
+   onChangeFilterShort,
+   isPageSavedMovies }) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
    const [error, setError] = useState('');   
@@ -22,7 +26,7 @@ function SearchForm({input, onGetMovies,movies,onSearch, onChangeFilterShort,isP
       }
       else {         
          setError('');         
-         if (!isPageSavedMovie) {
+         if (!isPageSavedMovies) {
             onGetMovies(inputSearch);
          }  
          else {
@@ -47,8 +51,11 @@ function SearchForm({input, onGetMovies,movies,onSearch, onChangeFilterShort,isP
          window.removeEventListener('resize', checkResolution);
       };
    }, []);
+
    useEffect(() => {
-      setInputSearch(input); 
+      if (!isPageSavedMovies) {
+         setInputSearch(input);
+      }
    }, [input]);
    
    return (
@@ -62,7 +69,7 @@ function SearchForm({input, onGetMovies,movies,onSearch, onChangeFilterShort,isP
                      Найти
                   </button>
                </div>
-               {!isMobileScreen && <FilterCheckBox onChangeFilterShort={onChangeFilterShort} />}
+               {!isMobileScreen && <FilterCheckBox isPageSavedMovies={isPageSavedMovies} onChangeFilterShort={onChangeFilterShort} />}
             </form>
             {isMobileScreen && (
                <div className="search__filter-wrapper">

@@ -11,16 +11,17 @@ import Preloader from '../Preloader/Preloader';
 function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    const isPageSavedMovies = true;
    const [searchSavedMovies, setSearchSavedMovies] = useState([]);
-   const [isSearch, setIsSearch] = useState(false);
+   const [isSearchSave, setIsSearchSave] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
-   const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
+ 
+   const [isShortSaveFilmChecked, setIsShortSaveFilmChecked] = useState(false);
    const [inputSaveSearch, setInputSaveSearch] = useState('');
    function handleSearchRes(searchRes) {      
       setSearchSavedMovies(searchRes);
-      setIsSearch(true);
+      setIsSearchSave(true);
    }
    const filterMovies = (movies) => {      
-      if (isShortFilmChecked) {
+      if (isShortSaveFilmChecked) {
          return movies.filter((movie) => movie.duration <= 40);
       } else {
          return movies;
@@ -37,20 +38,26 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
       setSearchSavedMovies(newSearchMovies);
    };
 
-   const filteredMovies = filterMovies(isSearch ? searchSavedMovies : saveMovies);
+   const filteredSaveMovies = filterMovies(isSearchSave ? searchSavedMovies : saveMovies);
+
    function handleChangeFilterShort(value) {
-      setIsShortFilmChecked(value);
+      setIsShortSaveFilmChecked(value);
    }
    return (
       <>
          <Header linkActive="saved-movies" isLoggedIn={loggedIn} />
-         <SearchForm inputSearch={inputSaveSearch } setInputSearch={setInputSaveSearch} isPageSavedMovie={isPageSavedMovies} onChangeFilterShort={handleChangeFilterShort} movies={saveMovies} onSearch={handleSearchRes} />
+         <SearchForm inputSearch={inputSaveSearch}
+            setInputSearch={setInputSaveSearch}
+            isPageSavedMovies={isPageSavedMovies}
+            onChangeFilterShort={handleChangeFilterShort}
+            movies={saveMovies}
+            onSearch={handleSearchRes} />
          {isLoading ? (<Preloader />) : (
             <>
-               {(isSearch && filteredMovies.length === 0 &&
+               {(isSearchSave && filteredSaveMovies.length === 0 &&
                   <NothingFound />
                )}
-               <MoviesCardList onDeleteMovie={onDeleteMovieComponent} movies={filteredMovies} saveMovies={saveMovies} isPageSavedMovies={isPageSavedMovies} />
+               <MoviesCardList onDeleteMovie={onDeleteMovieComponent} movies={filteredSaveMovies} saveMovies={saveMovies} isPageSavedMovies={isPageSavedMovies} />
             </>
          )}
          <Footer />
