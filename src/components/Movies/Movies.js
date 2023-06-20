@@ -71,7 +71,7 @@ function Movies({
             
              />
 
-         {isLoading ? (<Preloader />) : (
+         {isLoading ? (<div className="movies__preloader"><Preloader /></div>) : (
             <>
                {(isSearch && filteredMovies.length === 0 &&
                   <NothingFound />

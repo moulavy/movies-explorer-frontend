@@ -2,29 +2,45 @@ import React from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import Preloader from '../Preloader/Preloader.js';
 
-function Profile({ onUpdateUser,onLogout,error,setError }) {
+function Profile({ onUpdateUser, onLogout, error, setError,isLoading}) {
    const currentUser = React.useContext(CurrentUserContext);
    const isLoggedIn = true;
-   const [isEdit,setIsEdit] = useState(false);
-   const isDisabledButton = false;
+   const [isEdit, setIsEdit] = useState(false);
+   
    const [isDisabledInput, setIsDisabledInput] = useState(true);
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
    const [emailError, setEmailError] = React.useState('');
    const [nameError, setNameError] = React.useState('');
-   const [visibleButton, setVisibleButton] = React.useState(true);
+   
+   const [isFormChanged, setIsFormChanged] = useState(false);
+   const [isValidButton, setIsValidButton] = useState(false);
+
+   useEffect(() => {
+      console.log(nameError)
+      if (nameError === '' && emailError === '' && ((currentUser.data.name !== name) || (currentUser.data.email !== email)) && isFormChanged) {
+         
+         setIsValidButton(true);
+      }
+      else {
+         setIsValidButton(false);
+      }
+   }, [nameError, emailError,name,email,isFormChanged])
+
    useEffect(() => {
       return () => {
          setError(''); // сброс ошибки при размонтировании компонента
       };
    }, []);
-   useEffect(() => {      
+
+   useEffect(() => {
       setName(currentUser.data.name);
       setEmail(currentUser.data.email);
-      
+
    }, [currentUser]);
 
    function editProfile(event) {
@@ -35,6 +51,7 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
    function handleChangeEmail(e) {
       const value = e.target.value;
       setEmail(value);
+      setIsFormChanged(true);
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const isValid = value.trim() === '' || emailPattern.test(value);
 
@@ -47,6 +64,7 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
    function handleChangeName(e) {
       const value = e.target.value;
       setName(value);
+      setIsFormChanged(true);
       const namePattern = /^[а-яА-ЯёЁa-zA-Z\s-]+$/;
       const isValid = value.trim() === '' || namePattern.test(value);
 
@@ -56,15 +74,8 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
          setNameError('Имя должно содержать только латиницу, кириллицу, пробелы и дефисы');
       }
    }
-   useEffect(() => {
-      if (email  && name && nameError === '' && emailError === '' ) {
-         setVisibleButton(false);
-      }
-      else {
-         setVisibleButton(true);
-      }
-   }, [email, name])
-  
+
+
    function handleSubmit(e) {
       e.preventDefault();
       onUpdateUser({
@@ -79,7 +90,8 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
          <section className="profile">
             <div className="profile__container">
                <h1 className="profile__title">Привет, {name}!</h1>
-               <form onSubmit={ handleSubmit} className="profile__wrapper">
+               {isLoading && <Preloader />}
+               <form onSubmit={handleSubmit} className="profile__wrapper">
                   <div className="profile__group profile__name">
                      <label className="profile__label" htmlFor="name">Имя</label>
                      <input disabled={isDisabledInput}
@@ -94,7 +106,7 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
                         value={name || ''}
                         onChange={handleChangeName}
                      />
-                     
+
                   </div>
                   <p className="profile__error">{nameError}</p>
                   <div className="profile__group profile__email">
@@ -109,16 +121,19 @@ function Profile({ onUpdateUser,onLogout,error,setError }) {
                         value={email || ''}
                         onChange={handleChangeEmail}
                      />
-                     
+
                   </div>
                   <p className="profile__error">{emailError}</p>
+                  
                   {isEdit ?
-                     <>{ <p className="profile__button-error">{error}</p>}
-                        <button type="submit" disabled={isDisabledButton} className={isDisabledButton ? "profile__button-save profile__button-save_disabled" : "profile__button-save"}>Сохранить</button></>
-                     : <button type="button" onClick={ editProfile} className="profile__button">Редактировать</button>                                       
+                     <>{<p className="profile__button-error">{error}</p>}
+                        <button type="submit" disabled={!isValidButton} className={!isValidButton ? "profile__button-save profile__button-save_disabled" : "profile__button-save"}>Сохранить</button></>
+                     : <button type="button" onClick={editProfile} className="profile__button">Редактировать</button>
                   }
+                  
                </form>
-               { !isEdit &&
+              
+               {!isEdit &&
                   <Link onClick={onLogout} className="profile__logout">Выйти из аккаунта</Link>
                }
             </div>
