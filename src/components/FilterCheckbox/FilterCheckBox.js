@@ -1,13 +1,23 @@
 //фильтр с чекбоксом «Только короткометражки».
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './FilterCheckBox.css';
 
 function FilterCheckBox({onChangeFilterShort}) {
    const [isCheckedShort, setIsCheckedShort] = useState(false);
+   
+   useEffect(() => {
+      const savedValue = localStorage.getItem('isCheckedShort');
+      if (savedValue !== null) {
+         setIsCheckedShort(JSON.parse(savedValue));
+      }
+   }, []);
+
    const onChange = () => {
-      setIsCheckedShort(!isCheckedShort);
-      onChangeFilterShort(!isCheckedShort);
-   }
+      const newValue = !isCheckedShort;
+      setIsCheckedShort(newValue);
+      localStorage.setItem('isCheckedShort', JSON.stringify(newValue));
+      onChangeFilterShort(newValue);
+   };
    return (
       <label htmlFor="filter" className="checkbox">
          <input type="checkbox" id="filter" checked={isCheckedShort} onChange={onChange} className="checkbox__input" />
