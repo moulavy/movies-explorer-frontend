@@ -27,16 +27,31 @@ function App() {
    const [isSearch, setIsSearch] = useState(false);
    const [input, setInput] = useState('');
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
+   const [filteredMovies, setFilteredMovies] = useState([]);
+   
    useEffect(() => {
       setError('');
       tokenCheckCallback();
       setIsLoading(true);
       if (loggedIn) {
          Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
-            .then(([resUser, resSaveMovies]) => {
+            .then(([resUser, resSaveMovies]) => {               
+               const isCheckShortButton = localStorage.getItem('isCheckedShort');
+               console.log('isCheckedShortButton', isCheckShortButton);
+               const isCheckedShortButtonEmpty = isCheckShortButton === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
+               console.log('isCheckedShortButtonEmpty', isCheckedShortButtonEmpty)
                const isSearchMoviesEmty = localStorage.getItem('searchMovies') === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
-               console.log(isSearchMoviesEmty);
-               if (!isSearchMoviesEmty) {
+               if (!isCheckedShortButtonEmpty &&  isCheckShortButton === "true" ) {                  
+                     console.log('приходит')
+                     setIsShortFilmChecked(true);
+                     setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')))
+                     setInput(JSON.parse(localStorage.getItem('inputSearchValue')))
+                     setSearchMovies(JSON.parse(localStorage.getItem('searchMovies')));
+                     setIsSearch(true);
+                     setMovies(JSON.parse(localStorage.getItem('movies')));                  
+               }
+               else if (!isSearchMoviesEmty) {
+                  console.log('приходит search')
                   setInput(JSON.parse(localStorage.getItem('inputSearchValue')))
                   setSearchMovies(JSON.parse(localStorage.getItem('searchMovies')));
                   setIsSearch(true);
@@ -59,6 +74,23 @@ function App() {
             })
       }
    }, [loggedIn])
+
+   useEffect(() => {
+      const filterMovies = () => {
+         if (isShortFilmChecked) {
+            const filtered = searchMovies.filter((movie) => movie.duration <= 40);
+            setFilteredMovies(filtered);
+            localStorage.setItem('filteredMovies', JSON.stringify(filtered))
+           
+         } else {
+            setFilteredMovies(searchMovies);
+            
+         }
+      };
+      filterMovies();
+      
+   }, [isShortFilmChecked, searchMovies]);
+   
 
    const saveToLocal = (moviesList) => {
       localStorage.setItem('movies', JSON.stringify(moviesList));
@@ -206,6 +238,7 @@ function App() {
    }
    function handleChangeFilterShort(value) {
       setIsShortFilmChecked(value);
+      
    }
 
    return (
@@ -231,6 +264,9 @@ function App() {
                   email={email} />} />
                <Route path='/movies'
                   element={<ProtectedRoute
+                     filteredMovies={filteredMovies}
+                     setFilteredMovies={setFilteredMovies}
+                     
                      onGetMovies={handleGetMovies}
                      loggedIn={loggedIn}
                      element={Movies}

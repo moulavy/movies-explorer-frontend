@@ -32,6 +32,7 @@ function SearchForm({input, onGetMovies,movies,onSearch, onChangeFilterShort,isP
       };
 
    }
+   
 
    useEffect(() => {
       function checkResolution() {
@@ -48,8 +49,6 @@ function SearchForm({input, onGetMovies,movies,onSearch, onChangeFilterShort,isP
       setInputSearch(input); 
    }, [input]);
    
-   console.log('input:', input);
-   console.log('inputSearch:',inputSearch)
    return (
       <section className="search">
          <div className="search__container">

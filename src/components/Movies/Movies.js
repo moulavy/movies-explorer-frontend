@@ -9,6 +9,10 @@ import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
 function Movies({ isShortFilmChecked,
+   filteredMovies,
+   setFilteredMovies,
+   
+   
    onChangeFilterShort,
    input,
    isSearch,
@@ -24,7 +28,9 @@ function Movies({ isShortFilmChecked,
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
    const [moviesToShow, setMoviesToShow] = useState(0);   
- 
+   
+
+   
 
    useEffect(() => {
       function handleResize() {
@@ -59,16 +65,17 @@ function Movies({ isShortFilmChecked,
 
    };
 
-   const filterMovies = (movies) => {      
-      if (isShortFilmChecked) {         
-         return movies.filter((movie) => movie.duration <= 40);          
-      } else {
-         return movies;
-      }
-   };
+   // const filterMovies = (movies) => {      
+   //    if (isShortFilmChecked) {         
+   //       return movies.filter((movie) => movie.duration <= 40);          
+   //    } else {
+   //       return movies;
+   //    }
+   // };
 
-   const filteredMovies = filterMovies(searchMovies);
-   const visibleMovies = filteredMovies.slice(0, moviesToShow);
+   // const filteredMovies = filterMovies(searchMovies);
+    const visibleMovies = filteredMovies.slice(0, moviesToShow);
+   
    
 
    // function handleChangeFilterShort(value) {      

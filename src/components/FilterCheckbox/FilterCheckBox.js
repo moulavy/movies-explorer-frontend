@@ -9,7 +9,9 @@ function FilterCheckBox({onChangeFilterShort}) {
       const savedValue = localStorage.getItem('isCheckedShort');
       if (savedValue !== null) {
          setIsCheckedShort(JSON.parse(savedValue));
+         
       }
+      
    }, []);
 
    const onChange = () => {
