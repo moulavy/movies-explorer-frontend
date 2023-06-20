@@ -9,6 +9,8 @@ import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
 function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
+   const currentPath = window.location.pathname;
+   localStorage.setItem('currentPath', currentPath);
    const isPageSavedMovies = true;
    const [searchSavedMovies, setSearchSavedMovies] = useState([]);
    const [isSearchSave, setIsSearchSave] = useState(false);

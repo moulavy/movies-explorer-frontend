@@ -19,7 +19,8 @@ function Profile({ onUpdateUser, onLogout, error, setError,isLoading}) {
    
    const [isFormChanged, setIsFormChanged] = useState(false);
    const [isValidButton, setIsValidButton] = useState(false);
-
+   const currentPath = window.location.pathname;
+   localStorage.setItem('currentPath', currentPath);
    useEffect(() => {
       console.log(nameError)
       if (nameError === '' && emailError === '' && ((currentUser.data.name !== name) || (currentUser.data.email !== email)) && isFormChanged) {

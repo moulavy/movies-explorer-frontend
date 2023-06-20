@@ -29,7 +29,12 @@ function App() {
    const [input, setInput] = useState('');
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
    const [filteredMovies, setFilteredMovies] = useState([]);
-
+   useEffect(() => {
+      const currentPath = localStorage.getItem('currentPath'); 
+      if (currentPath) {
+         navigate(currentPath, { replace: true }); 
+      }
+   }, []);
    useEffect(() => {
       setError('');
       tokenCheckCallback();
@@ -130,6 +135,7 @@ function App() {
       setIsLoading(true);
       mainApi.register(email, name, password)
          .then(() => {
+            loginCallback(email, password);
             navigate("/signin", { replace: true });
          })
          .catch((err) => {
@@ -169,7 +175,13 @@ function App() {
                setLoggedIn(true);
                setEmail(res.data.email);
                setName(res.data.name);
-               navigate("/movies", { replace: true });
+               const currentPath = localStorage.getItem('currentPath');
+               if (currentPath) {
+                  navigate(currentPath, { replace: true });
+               }
+               else {
+                  navigate("/movies", { replace: true });
+               }
             })
             .catch((err) => {
                console.log(err);
@@ -207,6 +219,7 @@ function App() {
             localStorage.removeItem('searchMovies');
             localStorage.removeItem('filteredMovies');
             localStorage.removeItem('isCheckedShort');
+            localStorage.removeItem('currentPath');
             setMovies([]);
             setSaveMovies([]);
             setSearchMovies([]);

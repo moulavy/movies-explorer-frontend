@@ -9,7 +9,9 @@ import Portfolio from '../Portfolio/Portfolio.js';
 import Header from '../Header/Header.js'
 import Footer from '../Footer/Footer.js';
 
-function Main({isLoggedIn}) {
+function Main({ isLoggedIn }) {
+   const currentPath = window.location.pathname;
+   localStorage.setItem('currentPath', currentPath);
    return (
       <main className="main">
          <Header linkActive="home" isLoggedIn={isLoggedIn} />

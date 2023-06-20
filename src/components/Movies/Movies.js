@@ -24,7 +24,8 @@ function Movies({
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
    const [moviesToShow, setMoviesToShow] = useState(0);    
-
+   const currentPath = window.location.pathname;
+   localStorage.setItem('currentPath', currentPath);
    useEffect(() => {
       function handleResize() {
          setWindowWidth(window.innerWidth);
