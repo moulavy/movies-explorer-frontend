@@ -20,9 +20,15 @@ function SearchForm({ onGetMovies,movies,setMovies, onSearch, onChangeFilterShor
       }
       else {         
          setError('');         
-          onGetMovies(inputSearch);          
-         
-      
+         if (!isPageSavedMovie) {
+            onGetMovies(inputSearch);
+         }  
+         else {
+            const searchRes = movies.filter((movie) => {
+               return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
+            })
+            onSearch(searchRes);
+         }
       };
 
    }
@@ -39,12 +45,6 @@ function SearchForm({ onGetMovies,movies,setMovies, onSearch, onChangeFilterShor
       };
    }, []);
 
-   useEffect(() => {
-      if (!isPageSavedMovie && isSearch) {
-         onGetMovies();
-         setMovies(JSON.parse(localStorage.getItem('movies')));
-      }
-   }, [onGetMovies, isSearch]);
 
    return (
       <section className="search">

@@ -9,9 +9,6 @@ import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 
 function Movies({isSearch,searchMovies,onGetMovies, onDeleteMovie, onAddMovie,  isLoading,  movies,setMovies, saveMovies }) {
-   // const [searchMovies, setSearchMovies] = useState([]);
-   // const [isSearch, setIsSearch] = useState(false);
-  
    const isLoggedIn = true;
    const isPageSavedMovies = false;
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -42,12 +39,7 @@ function Movies({isSearch,searchMovies,onGetMovies, onDeleteMovie, onAddMovie,  
       calculateMoviesToShow();
    }, [windowWidth]);
 
-   /*массив найденных через поиск фильмов*/
-   // function handleSearchRes(searchRes) {      
-   //    setSearchMovies(searchRes);
-   //    setIsSearch(true); 
-   // }
-
+  
    const handleShowMore = () => {
       if (windowWidth >= 1280) {
          setMoviesToShow(moviesToShow + 4);

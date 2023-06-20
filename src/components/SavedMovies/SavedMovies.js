@@ -10,13 +10,13 @@ import Preloader from '../Preloader/Preloader';
 
 function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    const isPageSavedMovies = true;
-   const [searchMovies, setSearchMovies] = useState([]);
+   const [searchSavedMovies, setSearchSavedMovies] = useState([]);
    const [isSearch, setIsSearch] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
    
    function handleSearchRes(searchRes) {      
-      setSearchMovies(searchRes);
+      setSearchSavedMovies(searchRes);
       setIsSearch(true);
    }
    const filterMovies = (movies) => {      
@@ -33,11 +33,11 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie }) {
    }
    const handleDeleteMovieSearch = (movie) => {
             // Удаление фильма из массива searchMovies
-      const newSearchMovies = searchMovies.filter((item) => item._id !== movie._id);
-      setSearchMovies(newSearchMovies);
+      const newSearchMovies = searchSavedMovies.filter((item) => item._id !== movie._id);
+      setSearchSavedMovies(newSearchMovies);
    };
 
-   const filteredMovies = filterMovies(isSearch ? searchMovies : saveMovies);
+   const filteredMovies = filterMovies(isSearch ? searchSavedMovies : saveMovies);
    function handleChangeFilterShort(value) {
       setIsShortFilmChecked(value);
    }
