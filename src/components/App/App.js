@@ -37,8 +37,8 @@ function App() {
          Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
             .then(([resUser, resSaveMovies]) => {
                const isCheckShortButton = localStorage.getItem('isCheckedShort');
-               const isCheckedShortButtonEmpty = isCheckShortButton === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
-               const isSearchMoviesEmty = localStorage.getItem('searchMovies') === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
+               const isCheckedShortButtonEmpty = isCheckShortButton === null ;
+               const isSearchMoviesEmty = localStorage.getItem('searchMovies') === null ;
                if (!isCheckedShortButtonEmpty && isCheckShortButton === "true") {
                   setIsShortFilmChecked(true);
                   setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')))
@@ -198,6 +198,17 @@ function App() {
             localStorage.removeItem('movies');
             localStorage.removeItem('inputSearchValue');
             localStorage.removeItem('searchMovies');
+            localStorage.removeItem('filteredMovies');
+            localStorage.removeItem('isCheckedShort');
+
+            setMovies([]);
+            setSaveMovies([]);
+            setSearchMovies([]);
+            setInput('');
+            setIsSearch(false);
+            setIsShortFilmChecked(false);
+            setFilteredMovies([]);
+
             navigate("/signin", { replace: true });
          })
          .catch((err) => {
