@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
+import { useNavigate } from 'react-router-dom';
 
 function SearchForm({input, onGetMovies,movies,onSearch, onChangeFilterShort,isPageSavedMovie }) {
    const [isMobileScreen, setIsMobileScreen] = useState(false);
    const [inputSearch, setInputSearch] = useState('');
    const [error, setError] = useState('');   
    const [isSearch, setIsSearch] = useState(false);
+
    const onChange = (e) => {
       setInputSearch(e.target.value);
    }

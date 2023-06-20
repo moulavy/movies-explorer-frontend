@@ -18,7 +18,7 @@ function App() {
    const [movies, setMovies] = useState([]);
    const [saveMovies, setSaveMovies] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
-   const [email, setEmail] = useState('');  
+   const [email, setEmail] = useState('');
    const [name, setName] = useState('');
    const [currentUser, setCurrentUser] = useState({ data: { name: "Имя", email: "Email" } });
    const [loggedIn, setLoggedIn] = useState(false);
@@ -28,29 +28,27 @@ function App() {
    const [input, setInput] = useState('');
    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
    const [filteredMovies, setFilteredMovies] = useState([]);
-   
+
    useEffect(() => {
       setError('');
       tokenCheckCallback();
       setIsLoading(true);
       if (loggedIn) {
          Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
-            .then(([resUser, resSaveMovies]) => {               
+            .then(([resUser, resSaveMovies]) => {
                const isCheckShortButton = localStorage.getItem('isCheckedShort');
-               console.log('isCheckedShortButton', isCheckShortButton);
                const isCheckedShortButtonEmpty = isCheckShortButton === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
-               console.log('isCheckedShortButtonEmpty', isCheckedShortButtonEmpty)
                const isSearchMoviesEmty = localStorage.getItem('searchMovies') === null || JSON.parse(localStorage.getItem('searchMovies')).length === 0;
-               if (!isCheckedShortButtonEmpty &&  isCheckShortButton === "true" ) {              
-                     setIsShortFilmChecked(true);
-                     setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')))
-                     setInput(JSON.parse(localStorage.getItem('inputSearchValue')))
-                     setSearchMovies(JSON.parse(localStorage.getItem('searchMovies')));
-                     setIsSearch(true);
-                     setMovies(JSON.parse(localStorage.getItem('movies')));                  
+               if (!isCheckedShortButtonEmpty && isCheckShortButton === "true") {
+                  setIsShortFilmChecked(true);
+                  setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')))
+                  setInput(JSON.parse(localStorage.getItem('inputSearchValue')));                 
+                  setSearchMovies(JSON.parse(localStorage.getItem('searchMovies')));
+                  setIsSearch(true);
+                  setMovies(JSON.parse(localStorage.getItem('movies')));
                }
-               else if (!isSearchMoviesEmty) {                 
-                  setInput(JSON.parse(localStorage.getItem('inputSearchValue')))
+               else if (!isSearchMoviesEmty) {
+                  setInput(JSON.parse(localStorage.getItem('inputSearchValue')));
                   setSearchMovies(JSON.parse(localStorage.getItem('searchMovies')));
                   setIsSearch(true);
                   setMovies(JSON.parse(localStorage.getItem('movies')));
@@ -62,7 +60,7 @@ function App() {
                   }
                }
                setCurrentUser(resUser);
-               setSaveMovies(resSaveMovies);              
+               setSaveMovies(resSaveMovies);
             })
             .catch((err) => {
                console.log(err);
@@ -79,24 +77,24 @@ function App() {
             const filtered = searchMovies.filter((movie) => movie.duration <= 40);
             setFilteredMovies(filtered);
             localStorage.setItem('filteredMovies', JSON.stringify(filtered))
-           
+
          } else {
             setFilteredMovies(searchMovies);
-            
+
          }
       };
       filterMovies();
-      
+
    }, [isShortFilmChecked, searchMovies]);
-   
+
 
    const saveToLocal = (moviesList) => {
       localStorage.setItem('movies', JSON.stringify(moviesList));
    }
 
-    const getFromLocal = () => {
+   const getFromLocal = () => {
       setMovies(JSON.parse(localStorage.getItem('movies')));
-    }
+   }
    function handleSearchRes(searchRes) {
       setSearchMovies(searchRes);
       localStorage.setItem('searchMovies', JSON.stringify(searchRes));
@@ -107,17 +105,18 @@ function App() {
       movieApi.getMovies()
          .then((resMovies) => {
             localStorage.setItem('inputSearchValue', JSON.stringify(inputSearch));
+            setInput(inputSearch);
             saveToLocal(resMovies.reverse());
             setMovies(resMovies.reverse());
             const searchRes = resMovies.filter((movie) => {
                return movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase());
-            }) 
+            })
             handleSearchRes(searchRes);
-             getFromLocal();
+            getFromLocal();
          })
          .catch((err) => {
             console.log(err);
-         })      
+         })
    }
 
 
@@ -129,7 +128,7 @@ function App() {
          })
          .catch((err) => {
             setError(err.message);
-            console.log(err);            
+            console.log(err);
          })
          .finally(() => {
             setIsLoading(false);
@@ -211,7 +210,7 @@ function App() {
    }
 
    const handleAddMovie = (data) => {
-     
+
       mainApi.addMovies(data)
          .then((newMovie) => {
             setSaveMovies([newMovie.data, ...saveMovies]);
@@ -219,11 +218,11 @@ function App() {
          .catch((err) => {
             console.log(err);
          })
-        
+
    }
 
    const handleDeleteMovie = (movie) => {
-      
+
       mainApi.deleteMovie(movie._id)
          .then(() => {
             const newMovies = saveMovies.filter((item) => movie._id !== item._id);
@@ -232,11 +231,11 @@ function App() {
          .catch((err) => {
             console.log(err);
          })
-         
+
    }
    function handleChangeFilterShort(value) {
       setIsShortFilmChecked(value);
-      
+
    }
 
    return (
@@ -250,7 +249,7 @@ function App() {
                <Route path='/signup' element={<Register
                   setError={setError}
                   onRegister={registerCallback}
-                  error={ error} />} />
+                  error={error} />} />
                <Route path='/profile' element={<ProtectedRoute
                   error={error}
                   setError={setError}
@@ -264,7 +263,7 @@ function App() {
                   element={<ProtectedRoute
                      filteredMovies={filteredMovies}
                      setFilteredMovies={setFilteredMovies}
-                     
+
                      onGetMovies={handleGetMovies}
                      loggedIn={loggedIn}
                      element={Movies}
