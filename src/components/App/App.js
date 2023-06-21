@@ -81,9 +81,11 @@ function App() {
    useEffect(() => {
       const filterMovies = () => {
          if (isShortFilmChecked) {
-            const filtered = searchMovies.filter((movie) => movie.duration <= 40);
-            setFilteredMovies(filtered);
-            localStorage.setItem('filteredMovies', JSON.stringify(filtered))
+            if (searchMovies) {
+               const filtered = searchMovies.filter((movie) => movie.duration <= 40);
+               setFilteredMovies(filtered);
+               localStorage.setItem('filteredMovies', JSON.stringify(filtered))
+            }
 
          } else {
             setFilteredMovies(searchMovies);
