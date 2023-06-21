@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './FilterCheckbox.css';
 
-function FilterCheckBox({ onChangeFilterShort, isPageSavedMovies }) {
+function FilterCheckBox({movies, onChangeFilterShort, isPageSavedMovies }) {
    const [isCheckedShort, setIsCheckedShort] = useState(false);
    const [isCheckedSaveShort, setIsCheckedSaveShort] = useState(false);
    useEffect(() => {

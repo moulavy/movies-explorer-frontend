@@ -74,7 +74,7 @@ function SearchForm({ input,
             {isMobileScreen && (
                <div className="search__filter-wrapper">
                   <p className="search__error">{error}</p>
-                  <FilterCheckBox onChangeFilterShort={onChangeFilterShort} />
+                  <FilterCheckBox movies={movies} isPageSavedMovies={isPageSavedMovies} onChangeFilterShort={onChangeFilterShort} />
 
                </div>
             )}
