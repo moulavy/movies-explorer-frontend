@@ -19,7 +19,7 @@ function Register({ setError, onRegister, error }) {
    function handleChangeEmail(e) {
       const value = e.target.value;
       setEmail(value);
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const isValid = value.trim() === '' || emailPattern.test(value);
 
       if (isValid || value.trim() === '') {
@@ -37,7 +37,7 @@ function Register({ setError, onRegister, error }) {
    function handleChangeName(e) {
       const value = e.target.value;
       setName(value);
-      const namePattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const namePattern = /^[а-яА-ЯёЁa-zA-Z\s-]+$/;
       const isValid = value.trim() === '' || namePattern.test(value);
 
       if (isValid || value.trim() === '') {
