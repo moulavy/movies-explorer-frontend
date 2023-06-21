@@ -86,10 +86,8 @@ function App() {
                setFilteredMovies(filtered);
                localStorage.setItem('filteredMovies', JSON.stringify(filtered))
             }
-
          } else {
             setFilteredMovies(searchMovies);
-
          }
       };
       filterMovies();
@@ -104,6 +102,7 @@ function App() {
    const getFromLocal = () => {
       setMovies(JSON.parse(localStorage.getItem('movies')));
    }
+
    function handleSearchRes(searchRes) {
       setSearchMovies(searchRes);
       localStorage.setItem('searchMovies', JSON.stringify(searchRes));
@@ -131,9 +130,7 @@ function App() {
          .finally(() => {
             setIsLoading(false);
          })
-
    }
-
 
    const registerCallback = (email, name, password) => {
       setIsLoading(true);
@@ -232,7 +229,7 @@ function App() {
             setIsSearch(false);
             setIsShortFilmChecked(false);
             setFilteredMovies([]);
-            navigate("/signin", { replace: true });
+            navigate("/", { replace: true });
          })
          .catch((err) => {
             console.log(err);

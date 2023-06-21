@@ -1,6 +1,6 @@
 //фильтр с чекбоксом «Только короткометражки».
 import React, { useState, useEffect } from 'react';
-import './FilterCheckbox.css';
+import './FilterCheckBox.css';
 
 function FilterCheckBox({movies, onChangeFilterShort, isPageSavedMovies }) {
    const [isCheckedShort, setIsCheckedShort] = useState(false);

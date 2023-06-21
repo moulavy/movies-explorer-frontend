@@ -3,6 +3,8 @@ import './PageNotFound.css';
 import { Link } from 'react-router-dom';
 
 function PageNotFound() {
+   const currentPath = window.location.pathname;
+   localStorage.setItem('currentPath', currentPath);
    return (
       <section className="page-not-found">
          <h1 className="page-not-found__title">404</h1>

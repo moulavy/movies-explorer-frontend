@@ -6,31 +6,29 @@ import { useState, useEffect } from 'react';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Preloader from '../Preloader/Preloader.js';
 
+
 function Profile({ onUpdateUser, onLogout, error, setError, isLoading }) {
    const currentUser = React.useContext(CurrentUserContext);
    const isLoggedIn = true;
    const [isEdit, setIsEdit] = useState(false);
-
    const [isDisabledInput, setIsDisabledInput] = useState(true);
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
    const [emailError, setEmailError] = React.useState('');
    const [nameError, setNameError] = React.useState('');
-
    const [isFormChanged, setIsFormChanged] = useState(false);
-   const [isValidButton, setIsValidButton] = useState(false);
+   const [isValidButton, setIsValidButton] = useState(false);   
    const currentPath = window.location.pathname;
    localStorage.setItem('currentPath', currentPath);
    useEffect(() => {
-      console.log(nameError)
       if (nameError === '' && emailError === '' && ((currentUser.data.name !== name) || (currentUser.data.email !== email)) && isFormChanged) {
-
+console.log('да кнопка актив')
          setIsValidButton(true);
       }
       else {
          setIsValidButton(false);
       }
-   }, [nameError, emailError, name, email, isFormChanged])
+   }, [nameError, emailError, name, email, isFormChanged,currentUser])
 
    useEffect(() => {
       return () => {
@@ -41,34 +39,33 @@ function Profile({ onUpdateUser, onLogout, error, setError, isLoading }) {
    useEffect(() => {
       setName(currentUser.data.name);
       setEmail(currentUser.data.email);
-
    }, [currentUser]);
-
+ 
    function editProfile(event) {
       event.preventDefault();
       setIsEdit(true);
       setIsDisabledInput(false);
    }
+
    function handleChangeEmail(e) {
       const value = e.target.value;
       setEmail(value);
       setIsFormChanged(true);
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const isValid = value.trim() === '' || emailPattern.test(value);
-
       if (isValid || value.trim() === '') {
          setEmailError(e.target.validationMessage);
       } else {
          setEmailError('Неправильный формат email.');
       }
    }
+
    function handleChangeName(e) {
       const value = e.target.value;
       setName(value);
       setIsFormChanged(true);
       const namePattern = /^[а-яА-ЯёЁa-zA-Z\s-]+$/;
       const isValid = value.trim() === '' || namePattern.test(value);
-
       if (isValid || value.trim() === '') {
          setNameError(e.target.validationMessage);
       } else {
@@ -76,13 +73,16 @@ function Profile({ onUpdateUser, onLogout, error, setError, isLoading }) {
       }
    }
 
-
    function handleSubmit(e) {
       e.preventDefault();
       onUpdateUser({
          name,
          email,
       });
+      setTimeout(() => {
+         setIsEdit(false);
+         setIsDisabledInput(true);
+      }, 2000);
    }
 
    return (
