@@ -15,16 +15,20 @@ function FilterCheckBox({ onChangeFilterShort, isPageSavedMovies }) {
    }, []);
 
    const onChange = () => {
+
       if (!isPageSavedMovies) {
-         const newValue = !isCheckedShort;
-         setIsCheckedShort(newValue);
-         localStorage.setItem('isCheckedShort', JSON.stringify(newValue));
-         onChangeFilterShort(newValue);
+         if (movies && movies.length > 0) {
+            const newValue = !isCheckedShort;
+            setIsCheckedShort(newValue);
+            localStorage.setItem('isCheckedShort', JSON.stringify(newValue));
+            onChangeFilterShort(newValue);
+         }
       }
       else {
          setIsCheckedSaveShort(!isCheckedSaveShort);
          onChangeFilterShort(!isCheckedSaveShort)
       }
+
    };
    return (
       <label htmlFor="filter" className="checkbox">

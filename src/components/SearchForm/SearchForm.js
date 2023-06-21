@@ -69,7 +69,7 @@ function SearchForm({ input,
                      Найти
                   </button>
                </div>
-               {!isMobileScreen && <FilterCheckBox isPageSavedMovies={isPageSavedMovies} onChangeFilterShort={onChangeFilterShort} />}
+               {!isMobileScreen && <FilterCheckBox movies={movies} isPageSavedMovies={isPageSavedMovies} onChangeFilterShort={onChangeFilterShort} />}
             </form>
             {isMobileScreen && (
                <div className="search__filter-wrapper">
