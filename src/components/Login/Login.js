@@ -15,7 +15,7 @@ function Login({ setError, onLogin, error }) {
    function handleChangeEmail(e) {
       const value = e.target.value;
       setEmail(value);
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const isValid = value.trim() === '' || emailPattern.test(value);
 
       if (isValid || value.trim() === '') {

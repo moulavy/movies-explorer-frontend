@@ -70,6 +70,7 @@ function App() {
             })
             .catch((err) => {
                console.log(err);
+               setError(err.message);
             })
             .finally(() => {
                setIsLoading(false);
@@ -186,6 +187,7 @@ function App() {
             })
             .catch((err) => {
                console.log(err);
+               setError(err.message);
             })
             .finally(() => {
                setIsLoading(false);
