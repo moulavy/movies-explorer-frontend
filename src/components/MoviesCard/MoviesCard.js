@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MoviesCard.css';
+import { MINUTES_IN_HOUR } from '../../utils/config';
 
 function MoviesCard({ onDeleteMovie, onAddMovie, movie, isPageSavedMovies, saveMovies }) {
    const isLiked = isPageSavedMovies
@@ -22,8 +23,8 @@ function MoviesCard({ onDeleteMovie, onAddMovie, movie, isPageSavedMovies, saveM
    };
 
    const durationTransform = (duration) => {
-      const hour = Math.floor(duration / 60);
-      const minutes = duration % 60;
+      const hour = Math.floor(duration / MINUTES_IN_HOUR);
+      const minutes = duration % MINUTES_IN_HOUR;
       if (hour !== 0) {
          return `${hour}ч ${minutes}м`;
       } else {

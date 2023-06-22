@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.js';
 import Main from '../Main/Main.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
-import Preloader from '../Preloader/Preloader.js'
+
 
 import * as movieApi from '../../utils/MovieApi.js';
 import * as mainApi from '../../utils/MainApi.js'
@@ -14,6 +14,7 @@ import Register from '../Register/Register.js';
 import SavedMovies from '../SavedMovies/SavedMovies.js';
 import Profile from '../Profile/Profile.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js'
+import { SHORT_MOVIES_DURATION } from '../../utils/config';
 function App() {
    const navigate = useNavigate();
    const [movies, setMovies] = useState([]);
@@ -82,7 +83,7 @@ function App() {
       const filterMovies = () => {
          if (isShortFilmChecked) {
             if (searchMovies) {
-               const filtered = searchMovies.filter((movie) => movie.duration <= 40);
+               const filtered = searchMovies.filter((movie) => movie.duration <= SHORT_MOVIES_DURATION);
                setFilteredMovies(filtered);
                localStorage.setItem('filteredMovies', JSON.stringify(filtered))
             }

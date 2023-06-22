@@ -8,6 +8,7 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
 import ErrorMovies from '../ErrorMovies/ErrorMovies';
+import {SCREEN_CONFIG} from '../../utils/config.js'
 
 function Movies({ error, setError,
    filteredMovies,
@@ -41,37 +42,21 @@ function Movies({ error, setError,
          window.removeEventListener('resize', handleResize);
       };
    }, []);
-
    useEffect(() => {
       const calculateMoviesToShow = () => {
-         if (windowWidth >= 1280) {
-            setMoviesToShow(16);
-         }
-         else if (windowWidth >= 994) {
-            setMoviesToShow(9);
-         }
-         else if (windowWidth >= 768) {
-            setMoviesToShow(8);
-         } else {
-            setMoviesToShow(5);
-         }
+         const currentScreenConfig = SCREEN_CONFIG.find(item => windowWidth >= item.SCREEN_WIDTH);         
+         setMoviesToShow(currentScreenConfig.MOVIES_TO_SHOW);
       };
       calculateMoviesToShow();
    }, [windowWidth]);
 
 
    const handleShowMore = () => {
-      if (windowWidth >= 1280) {
-         setMoviesToShow(moviesToShow + 4);
-      }
-      else if (windowWidth >= 994) {
-         setMoviesToShow(moviesToShow + 3);
-      }
-      else {
-         setMoviesToShow(moviesToShow + 2);
-      }
-
+      const currentScreenConfig = SCREEN_CONFIG.find(item => windowWidth >= item.SCREEN_WIDTH)
+      const moviesToAdd = currentScreenConfig.MOVIES_TO_ADD;
+      setMoviesToShow(moviesToShow+moviesToAdd);
    };
+   
 
    const visibleMovies = filteredMovies.slice(0, moviesToShow);
    return (
@@ -107,8 +92,6 @@ function Movies({ error, setError,
 
             </>
          )}
-
-
          <Footer />
       </>
    );

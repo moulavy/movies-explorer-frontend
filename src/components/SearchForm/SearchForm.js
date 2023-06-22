@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import searchIcon from '../../images/searchIcon.svg';
 import FilterCheckBox from '../FilterCheckbox/FilterCheckBox.js';
+import { MOBILE_SCREEN_FOR_SEARCH } from '../../utils/config';
 
 function SearchForm({ input,
    onGetMovies,
@@ -43,7 +44,7 @@ function SearchForm({ input,
    useEffect(() => {
       function checkResolution() {
          const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-         setIsMobileScreen(screenWidth < 686);
+         setIsMobileScreen(screenWidth < MOBILE_SCREEN_FOR_SEARCH);
       }
       checkResolution();
       window.addEventListener('resize', checkResolution);

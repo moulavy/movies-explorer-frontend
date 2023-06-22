@@ -1,5 +1,5 @@
-//export const BASE_URL_MAIN = 'https://api.movies.moulavy.nomoredomains.rocks';
- export const BASE_URL_MAIN = 'http://localhost:3009';
+export const BASE_URL_MAIN = 'https://api.movies.moulavy.nomoredomains.rocks';
+ //export const BASE_URL_MAIN = 'http://localhost:3009';
 
 function checkResponse(res) {
    if (res.ok) {

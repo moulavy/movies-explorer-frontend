@@ -7,6 +7,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
 import NothingFound from '../NothingFound/NothingFound';
 import Preloader from '../Preloader/Preloader';
+import { SHORT_MOVIES_DURATION } from '../../utils/config';
 
 function SavedMovies({ loggedIn, saveMovies, onDeleteMovie, isLoading }) {
    const currentPath = window.location.pathname;
@@ -23,7 +24,7 @@ function SavedMovies({ loggedIn, saveMovies, onDeleteMovie, isLoading }) {
    }
    const filterMovies = (movies) => {
       if (isShortSaveFilmChecked) {
-         return movies.filter((movie) => movie.duration <= 40);
+         return movies.filter((movie) => movie.duration <= SHORT_MOVIES_DURATION);
       } else {
          return movies;
       }
