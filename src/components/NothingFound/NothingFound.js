@@ -1,7 +1,5 @@
 import React from 'react';
 import './NothingFound.css';
-
-
 function NothingFound() {
    return (
       <div className="nothing-found">

@@ -17,18 +17,18 @@ function Profile({ onUpdateUser, onLogout, error, setError, isLoading }) {
    const [emailError, setEmailError] = React.useState('');
    const [nameError, setNameError] = React.useState('');
    const [isFormChanged, setIsFormChanged] = useState(false);
-   const [isValidButton, setIsValidButton] = useState(false);   
+   const [isValidButton, setIsValidButton] = useState(false);
    const currentPath = window.location.pathname;
    localStorage.setItem('currentPath', currentPath);
    useEffect(() => {
       if (nameError === '' && emailError === '' && ((currentUser.data.name !== name) || (currentUser.data.email !== email)) && isFormChanged) {
-console.log('да кнопка актив')
+         console.log('да кнопка актив')
          setIsValidButton(true);
       }
       else {
          setIsValidButton(false);
       }
-   }, [nameError, emailError, name, email, isFormChanged,currentUser])
+   }, [nameError, emailError, name, email, isFormChanged, currentUser])
 
    useEffect(() => {
       return () => {
@@ -40,7 +40,7 @@ console.log('да кнопка актив')
       setName(currentUser.data.name);
       setEmail(currentUser.data.email);
    }, [currentUser]);
- 
+
    function editProfile(event) {
       event.preventDefault();
       setIsEdit(true);

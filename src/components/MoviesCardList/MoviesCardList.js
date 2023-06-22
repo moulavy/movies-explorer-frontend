@@ -2,7 +2,6 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
-
 function MoviesCardList({ onDeleteMovie, saveMovies, onAddMovie, movies, isPageSavedMovies, }) {
    return (
       <section className="movieslist">
@@ -15,7 +14,6 @@ function MoviesCardList({ onDeleteMovie, saveMovies, onAddMovie, movies, isPageS
                   movie={movie}
                   key={isPageSavedMovies ? movie._id : movie.id}
                   saveMovies={saveMovies}
-
                />
             ))}
          </div>
