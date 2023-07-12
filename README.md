@@ -44,7 +44,7 @@
 3) Запустить: npm run start
 
 ## Открыть сайт:
-* Ссылка на сайт: https://movies.moulavy.nomoredomains.rocks/profile
+* Ссылка на сайт: https://movies.moulavy.nomoredomains.rocks
 * Ссылка на макет: https://disk.yandex.ru/d/vnKoN21915hoew
 * Ссылка на проект - бэкенд часть: https://github.com/moulavy/movies-explorer-api
 * Ссылка для обращения к бэкенду по домену: https://api.movies.moulavy.nomoredomains.rocks/
